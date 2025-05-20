@@ -2,65 +2,17 @@ import Link from "next/link"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { getAllBlogPosts } from "@/controllers/getAllBlogPost"
 
-// Mock data for blog posts
-const blogPosts = [
-  {
-    id: "1",
-    title: "10 Mind-Blowing Movie Endings Explained",
-    excerpt: "Dive into the most shocking movie endings and what they really mean.",
-    date: "May 12, 2025",
-    category: "Movies",
-    image: "/placeholder-movie.png",
-  },
-  {
-    id: "2",
-    title: "The Evolution of Music Videos in 2025",
-    excerpt: "Explore how music videos have transformed with new tech and trends.",
-    date: "May 8, 2025",
-    category: "Music",
-    image: "/placeholder-music.png",
-  },
-  {
-    id: "3",
-    title: "Top 10 Must-Watch TV Shows This Year",
-    excerpt: "From thrillers to comedies, check out the most binge-worthy shows of 2025.",
-    date: "May 5, 2025",
-    category: "TV Shows",
-    image: "/placeholder-shows.png",
-  },
-  {
-    id: "4",
-    title: "Behind the Scenes: How Blockbusters Are Made",
-    excerpt: "A look into the production secrets of your favorite blockbusters.",
-    date: "May 1, 2025",
-    category: "Film Industry",
-    image: "/placeholder-scence.png",
-  },
-  {
-    id: "5",
-    title: "Gaming Trends to Watch in 2025",
-    excerpt: "Discover what’s hot in the gaming world this year and what’s coming next.",
-    date: "April 28, 2025",
-    category: "Gaming",
-    image: "/placeholder-games.png",
-  },
-  {
-    id: "6",
-    title: "A Beginner’s Guide to K-Pop Fandom",
-    excerpt: "Everything you need to know to dive into the vibrant world of K-Pop.",
-    date: "April 25, 2025",
-    category: "Pop Culture",
-    image: "/placeholder-pop.png",
-  },
-]
 
 export const metadata = {
   title: "Blog | Modern Web App",
   description: "Read our latest articles and insights on web development, design, and technology.",
 }
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const blogPosts = await getAllBlogPosts();
+
   return (
     <div className="container mx-auto py-8 md:py-12">
       <div className="flex flex-col items-center mb-8 text-center">

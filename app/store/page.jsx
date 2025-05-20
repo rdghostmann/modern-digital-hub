@@ -2,73 +2,17 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { AddToCartButton } from "@/components/add-to-cart-button"
 import Link from "next/link"
 import Image from "next/image"
+import { getAllProducts } from "@/controllers/getAllProduct"
 
-// Mock data for products
-const products = [
-  {
-    id: "1",
-    name: "Wireless Headphones",
-    description: "Premium noise-cancelling wireless headphones",
-    price: 199.99,
-    image: "/placeholder-headphones.png",
-  },
-  {
-    id: "2",
-    name: "Smart Watch",
-    description: "Track your fitness and stay connected",
-    price: 249.99,
-    image: "/placeholder-smartwatch.png",
-  },
-  {
-    id: "3",
-    name: "Mechanical Keyboard",
-    description: "Tactile typing experience with RGB lighting",
-    price: 129.99,
-    image: "/placeholder-mechanical.png",
-  },
-  {
-    id: "4",
-    name: "Wireless Mouse",
-    description: "Ergonomic design with precision tracking",
-    price: 79.99,
-    image: "/placeholder-mouse.png",
-  },
-  {
-    id: "5",
-    name: "4K Monitor",
-    description: "Ultra-high definition display for professionals",
-    price: 349.99,
-    image: "/placeholder-4k.png",
-  },
-  {
-    id: "6",
-    name: "Laptop Stand",
-    description: "Adjustable height for ergonomic viewing",
-    price: 49.99,
-    image: "/placeholder-stand.png",
-  },
-  {
-    id: "7",
-    name: "Wireless Charger",
-    description: "Fast charging for compatible devices",
-    price: 39.99,
-    image: "/placeholder-charger.png",
-  },
-  {
-    id: "8",
-    name: "External SSD",
-    description: "1TB high-speed portable storage",
-    price: 159.99,
-    image: "/placeholder-external.png",
-  },
-]
 
 export const metadata = {
   title: "Store | Modern Web App",
   description: "Shop our curated selection of tech products.",
 }
 
-export default function StorePage() {
+export default async function StorePage() {
+  const products = await getAllProducts();
+  
   return (
     <div className="container mx-auto py-8 md:py-12">
       <div className="flex flex-col items-center mb-8 text-center">

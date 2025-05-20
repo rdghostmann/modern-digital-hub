@@ -1,14 +1,28 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ThumbsUp, ThumbsDown } from "lucide-react"
 import { Card, CardContent } from "./ui/card"
 import { Button } from "./ui/button"
+import { getFeaturedVideo } from "@/controllers/getFeaturedVideo"
 
 export default function FeaturedVideo() {
-  const [likes, setLikes] = useState(124)
-  const [dislikes, setDislikes] = useState(8)
+  const [video, setVideo] = useState(null)
+  const [likes, setLikes] = useState(0)
+  const [dislikes, setDislikes] = useState(0)
   const [userAction, setUserAction] = useState(null)
+
+  useEffect(() => {
+    async function fetchVideo() {
+      const data = await getFeaturedVideo()
+      setVideo(data)
+      if (data) {
+        setLikes(data.likes || 0)
+        setDislikes(data.dislikes || 0)
+      }
+    }
+    fetchVideo()
+  }, [])
 
   const handleLike = () => {
     if (userAction === "like") {
@@ -36,26 +50,36 @@ export default function FeaturedVideo() {
     }
   }
 
+  if (!video) {
+    return (
+      <Card className="w-full max-w-3xl mx-auto overflow-hidden">
+        <CardContent className="p-8 text-center">Loading featured video...</CardContent>
+      </Card>
+    )
+  }
+
   return (
-    <Card className="w-full max-w-3xl  mx-auto overflow-hidden">
+    <Card className="w-full max-w-3xl mx-auto overflow-hidden">
       <CardContent className="p-0">
         <div className="aspect-video bg-slate-100 dark:bg-slate-800 relative">
           <iframe
             className="w-full h-full absolute"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Video of the Week"
+            src={video.embedUrl}
+            title={video.title}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
         </div>
         <div className="p-4">
-          <h3 className="text-xl font-bold mb-2">Amazing Web Development Techniques for 2025</h3>
+          <h3 className="text-xl font-bold mb-2">{video.title}</h3>
           <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-            Learn the latest web development techniques that will revolutionize how you build applications.
+            {video.description}
           </p>
           <div className="flex items-center justify-between">
-            <div className="text-sm text-slate-500 dark:text-slate-400">Posted on May 15, 2025</div>
+            <div className="text-sm text-slate-500 dark:text-slate-400">
+              Posted on {new Date(video.date).toLocaleDateString()}
+            </div>
             <div className="flex items-center gap-2">
               <Button
                 variant="ghost"
