@@ -10,14 +10,14 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col items-center space-y-4 text-center">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
                 Your Modern Digital Hub
               </h1>
               <p className="mx-auto max-w-[700px] text-slate-500 md:text-xl dark:text-slate-400">
-                Discover our blog, shop our products, and watch our featured videos all in one place.
+                Discover our blog, shop our products, and watch our <br className="hidden md:block" /> featured videos all in one place.
               </p>
             </div>
             <div className="space-x-4">
