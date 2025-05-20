@@ -28,7 +28,7 @@ const products = [
       Charging: "USB-C",
       "Colors Available": "Black, Silver, Blue",
     },
-    image: "/placeholder.svg?height=500&width=500",
+    image: "/placeholder-headphones.png",
   },
   {
     id: "2",
@@ -51,7 +51,7 @@ const products = [
       Sensors: "Accelerometer, Gyroscope, Heart Rate, SpO2",
       Connectivity: "Bluetooth 5.0, Wi-Fi",
     },
-    image: "/placeholder.svg?height=500&width=500",
+    image: "/placeholder-smartwatch.png",
   },
   {
     id: "3",
@@ -74,7 +74,7 @@ const products = [
       Weight: "1.1kg",
       Keycaps: "Double-shot PBT",
     },
-    image: "/placeholder.svg?height=500&width=500",
+    image: "/placeholder-mechanical.png",
   },
   {
     id: "4",
@@ -96,7 +96,7 @@ const products = [
       Battery: "Rechargeable Li-ion",
       Connectivity: "2.4GHz wireless, Bluetooth, USB-C",
     },
-    image: "/placeholder.svg?height=500&width=500",
+    image: "/placeholder-mouse.png",
   },
   {
     id: "5",
