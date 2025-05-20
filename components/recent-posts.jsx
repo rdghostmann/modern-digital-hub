@@ -5,29 +5,29 @@ import { Card, CardContent } from "./ui/card"
 
 // Mock data for recent blog posts
 const recentPosts = [
-  {
+ {
     id: "1",
-    title: "10 JavaScript Tricks You Didn't Know",
-    excerpt: "Discover advanced JavaScript techniques that will level up your coding skills.",
+    title: "10 Mind-Blowing Movie Endings Explained",
+    excerpt: "Dive into the most shocking movie endings and what they really mean.",
     date: "May 12, 2025",
-    category: "Development",
-    image: "/placeholder.svg?height=200&width=400",
+    category: "Movies",
+    image: "/placeholder-movie.png",
   },
   {
     id: "2",
-    title: "The Future of Web Design in 2025",
-    excerpt: "Explore the latest trends and technologies shaping the future of web design.",
+    title: "The Evolution of Music Videos in 2025",
+    excerpt: "Explore how music videos have transformed with new tech and trends.",
     date: "May 8, 2025",
-    category: "Design",
-    image: "/placeholder.svg?height=200&width=400",
+    category: "Music",
+    image: "/placeholder-music.png",
   },
   {
     id: "3",
-    title: "Building Accessible Web Applications",
-    excerpt: "Learn how to create web applications that are accessible to everyone.",
+    title: "Top 10 Must-Watch TV Shows This Year",
+    excerpt: "From thrillers to comedies, check out the most binge-worthy shows of 2025.",
     date: "May 5, 2025",
-    category: "Accessibility",
-    image: "/placeholder.svg?height=200&width=400",
+    category: "TV Shows",
+    image: "/placeholder-shows.png",
   },
 ]
 

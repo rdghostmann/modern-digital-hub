@@ -10,21 +10,21 @@ const featuredProducts = [
     name: "Wireless Headphones",
     description: "Premium noise-cancelling wireless headphones",
     price: 199.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/placeholder-headphones.png",
   },
   {
     id: "2",
     name: "Smart Watch",
     description: "Track your fitness and stay connected",
     price: 249.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/placeholder-smartwatch.png",
   },
   {
     id: "3",
     name: "Mechanical Keyboard",
     description: "Tactile typing experience with RGB lighting",
     price: 129.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/placeholder-mechanical.png",
   },
 ]
 
