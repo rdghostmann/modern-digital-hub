@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="w-full border-t py-6 md:py-8">
       <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:flex-row">
         <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-          © {new Date().getFullYear()} ModernApp. All rights reserved.
+          © {new Date().getFullYear()} BlogStore. All rights reserved.
         </p>
         <div className="flex gap-4">
           <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">

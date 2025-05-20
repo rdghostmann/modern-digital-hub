@@ -26,7 +26,7 @@ export default function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="font-bold text-xl">
-            ModernApp
+            BlogStore
           </Link>
         </div>
 
@@ -72,7 +72,7 @@ export default function Header() {
         <div className="fixed inset-0 z-50 bg-background md:hidden">
           <div className="container flex h-16 items-center justify-between">
             <Link href="/" className="font-bold text-xl">
-              ModernApp
+              BlogStore
             </Link>
             <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(false)}>
               <X className="h-5 w-5" />
