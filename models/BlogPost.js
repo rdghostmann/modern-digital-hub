@@ -2,18 +2,24 @@ import mongoose from "mongoose"
 
 const BlogPostSchema = new mongoose.Schema({
   title: {
-    type: String, 
+    type: String,
     required: true
   },
   excerpt: {
-    type: String
+    type: String,
+    required: true
   },
   content: {
-    type: String
+    type: String,
+    required: true
   },
   date: {
-    type: Date, 
+    type: Date,
     default: Date.now
+  },
+  author: {
+    type: String,
+    required: true
   },
   category: {
     type: mongoose.Schema.Types.ObjectId, ref: "Category"

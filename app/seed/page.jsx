@@ -1,9 +1,9 @@
 import mongoose from "mongoose"
 import { connectToDB } from "@/lib/connectDB"
-import VBlog from "@/models/VBlog"
-import { videos } from "@/lib/video"
+import Product from "@/models/Product"
+import { products } from "@/lib/product"
 
-export const dynamic = "force-dynamic" // Ensures this runs on every request
+export const dynamic = "force-dynamic"
 
 export default async function SeedPage() {
   let status = "idle"
@@ -11,13 +11,8 @@ export default async function SeedPage() {
 
   try {
     await connectToDB()
-    await VBlog.deleteMany()
-    // Convert string dates to Date objects for MongoDB
-    const videoDocs = videos.map(video => ({
-      ...video,
-      date: new Date(video.date),
-    }))
-    await VBlog.insertMany(videoDocs)
+    await Product.deleteMany()
+    await Product.insertMany(products)
     status = "done"
     mongoose.disconnect()
   } catch (err) {

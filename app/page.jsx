@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import FeaturedVideo from "@/components/featured-video"
 import FeaturedProducts from "@/components/featured-products"
 import RecentPosts from "@/components/recent-posts"
+import { Suspense } from "react"
 
 export default function Home() {
   return (
@@ -48,7 +49,9 @@ export default function Home() {
                 Check out our latest featured video content.
               </p>
             </div>
-            <FeaturedVideo />
+            <Suspense fallback={<div className="h-48 w-full bg-slate-200 dark:bg-slate-800 animate-pulse" />}>
+              <FeaturedVideo />
+            </Suspense>
             <Button asChild variant="link">
               <Link href="/videos" className="flex items-center">
                 View all videos
@@ -96,7 +99,10 @@ export default function Home() {
                 Stay updated with our latest articles and insights.
               </p>
             </div>
-            <RecentPosts />
+            <Suspense fallback={<div className="h-48 w-full bg-slate-200 dark:bg-slate-800 animate-pulse" />}>
+              <RecentPosts />
+            </Suspense>
+
             <Button asChild variant="link">
               <Link href="/blog" className="flex items-center">
                 View all posts

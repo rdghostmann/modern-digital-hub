@@ -10,8 +10,15 @@ const ProductSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-
     required: true
+  },
+  features: {
+    type: [String],
+    default: []
+  },
+  specs: {
+    type: mongoose.Schema.Types.Mixed, // Allows for flexible key-value pairs
+    default: {}
   },
   image: {
     type: String
