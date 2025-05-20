@@ -35,7 +35,7 @@ export default async function StorePage() {
                 <Link href={`/store/${product.id}`}>
                   <h3 className="font-semibold text-lg mb-1 hover:underline">{product.name}</h3>
                 </Link>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">{product.description}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-2 line-clamp-5">{product.description}</p>
                 <p className="font-bold">₦{product.price.toFixed(2)}</p>
               </div>
             </CardContent>
