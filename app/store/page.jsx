@@ -12,7 +12,7 @@ export const metadata = {
 
 export default async function StorePage() {
   const products = await getAllProducts();
-  
+
   return (
     <div className="container mx-auto py-8 md:py-12">
       <div className="flex flex-col items-center mb-8 text-center">
@@ -24,18 +24,25 @@ export default async function StorePage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <Card key={product.id} className="overflow-hidden">
+          <Card key={product._id} className="overflow-hidden">
             <CardContent className="p-0">
-              <Link href={`/store/${product.id}`}>
+              <Link href={`/store/${product._id}`}>
                 <div className="relative h-48 w-full">
-                  <Image src={product.image || "/placeholder.svg"} alt={product.name} fill className="object-cover" />
-                </div>
+                  <Image
+                    src={product.image || "/placeholder.svg"}
+                    alt={product.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    priority
+                  />               
+                   </div>
               </Link>
               <div className="p-4">
-                <Link href={`/store/${product.id}`}>
+                <Link href={`/store/${product._id}`}>
                   <h3 className="font-semibold text-lg mb-1 hover:underline">{product.name}</h3>
                 </Link>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mb-2 line-clamp-5">{product.description}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-2 line-clamp-3">{product.description}</p>
                 <p className="font-bold">₦{product.price.toFixed(2)}</p>
               </div>
             </CardContent>
