@@ -5,7 +5,7 @@ import { AddToCartButton } from "./add-to-cart-button"
 import { getFeaturedProducts } from "@/controllers/getFeaturedProduct"
 
 export default async function FeaturedProducts() {
-  const featuredProducts = await getFeaturedProducts()
+  const featuredProducts = await getFeaturedProducts();
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
       {featuredProducts.map((product) => (

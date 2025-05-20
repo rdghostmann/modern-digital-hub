@@ -43,7 +43,9 @@ export default async function BlogPostPage({ params }) {
 
         <div className="flex items-center gap-2 mb-4">
           <Badge variant="secondary">{post.category}</Badge>
-          <span className="text-sm text-slate-500 dark:text-slate-400">{post.date}</span>
+          <span className="text-sm text-slate-500 dark:text-slate-400">
+            {post.date ? post.date.slice(0, 10) : ""}
+          </span>
         </div>
 
         <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">{post.title}</h1>

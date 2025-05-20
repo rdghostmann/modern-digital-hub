@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { getAllBlogPosts } from "@/controllers/getAllBlogPost"
 
-
 export const metadata = {
   title: "Blog | Modern Web App",
   description: "Read our latest articles and insights on web development, design, and technology.",
@@ -34,7 +33,9 @@ export default async function BlogPage() {
               <div className="p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge variant="secondary">{post.category}</Badge>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">{post.date}</span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
+                    {post.date ? new Date(post.date).toLocaleDateString() : ""}
+                  </span>
                 </div>
                 <Link href={`/blog/${post.id}`}>
                   <h3 className="font-semibold text-lg mb-2 hover:underline">{post.title}</h3>
