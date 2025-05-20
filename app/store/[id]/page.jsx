@@ -64,9 +64,13 @@ export default async function ProductPage({ params }) {
             <div className="mt-8">
               <h2 className="text-xl font-semibold mb-4">Features</h2>
               <ul className="list-disc pl-5 space-y-2">
-                {product.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
+                {product.features && product.features.length > 0 && (
+                  <ul>
+                    {product.features.map((feature, index) => (
+                      <li key={index}>{feature}</li>
+                    ))}
+                  </ul>
+                )}
               </ul>
             </div>
           )}
