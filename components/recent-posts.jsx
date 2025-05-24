@@ -9,9 +9,9 @@ export default async function RecentPosts() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
       {recentPosts.map((post) => (
-        <Card key={post._id} className="overflow-hidden">
+        <Card key={post.id} className="overflow-hidden">
           <CardContent className="p-0">
-            <Link href={`/blog/${post._id}`}>
+            <Link href={`/blog/${post.id}`}>
               <div className="relative h-48 w-full">
                 <Image
                   src={post.image || "/placeholder.svg"}
@@ -29,10 +29,10 @@ export default async function RecentPosts() {
                   {new Date(post.date).toLocaleDateString()}
                 </span>
               </div>
-              <Link href={`/blog/${post._id}`}>
-                <h3 className="font-semibold text-lg mb-2 hover:underline">{post.title}</h3>
+              <Link href={`/blog/${post.id}`}>
+                <h3 className="font-semibold text-lg mb-2 hover:underline line-clamp-2">{post.title}</h3>
               </Link>
-              <p className="text-sm text-slate-500 dark:text-slate-400">{post.excerpt}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">{post.excerpt}</p>
             </div>
           </CardContent>
         </Card>

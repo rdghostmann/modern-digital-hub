@@ -8,12 +8,13 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Badge } from "@/components/ui/badge"
 import { CartSidebar } from "./CartSidebar/CartSidebar"
+import { useCartStore } from "@/store/cart-store"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
-  const items = useCartStore((state) => state.items)
   const openCart = useCartStore((state) => state.openCart)
+  const items = useCartStore((state) => state.items)
 
 
   const routes = [

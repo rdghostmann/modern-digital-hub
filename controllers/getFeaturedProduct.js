@@ -8,6 +8,7 @@ export async function getFeaturedProducts() {
   const products = await Product.find().limit(3).lean()
   return products.map(product => ({
     ...product,
-    _id: product._id.toString(),
+     id: product._id ? product._id.toString() : product.id,
+    _id: undefined, // Remove _id to avoid confusion
   }))
 }

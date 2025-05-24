@@ -1,21 +1,21 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { useCartStore } from "@/store/cart-store"
 import { Button } from "@/components/ui/button"
 import { Trash2, X } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
-export function CartSidebar() {
-  const { cartOpen, closeCart, items, removeItem, updateQuantity, getTotal, clearCart } = useCartStore((state) => ({
-    cartOpen: state.cartOpen,
-    closeCart: state.closeCart,
-    items: state.items,
-    removeItem: state.removeItem,
-    updateQuantity: state.updateQuantity,
-    getTotal: state.getTotal,
-    clearCart: state.clearCart,
-  }))
+// Wrap the component in a dynamic import with ssr: false
+function CartSidebarComponent() {
+  const cartOpen = useCartStore((state) => state.cartOpen)
+  const closeCart = useCartStore((state) => state.closeCart)
+  const items = useCartStore((state) => state.items)
+  const removeItem = useCartStore((state) => state.removeItem)
+  const updateQuantity = useCartStore((state) => state.updateQuantity)
+  const getTotal = useCartStore((state) => state.getTotal)
+  const clearCart = useCartStore((state) => state.clearCart)
 
   return (
     <>
@@ -97,3 +97,6 @@ export function CartSidebar() {
     </>
   )
 }
+
+// Export as dynamic with ssr: false
+export const CartSidebar = dynamic(() => Promise.resolve(CartSidebarComponent), { ssr: false })

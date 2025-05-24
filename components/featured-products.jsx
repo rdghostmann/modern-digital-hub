@@ -9,18 +9,18 @@ export default async function FeaturedProducts() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
       {featuredProducts.map((product) => (
-        <Card key={product._id} className="overflow-hidden">
+        <Card key={product.id} className="overflow-hidden">
           <CardContent className="p-0">
-            <Link href={`/store/${product._id}`}>
+            <Link href={`/store/${product.id}`}>
               <div className="relative h-48 w-full">
                 <Image src={product.image || "/placeholder.svg"} alt={product.name} fill className="object-cover" />
               </div>
             </Link>
             <div className="p-4">
-              <Link href={`/store/${product._id}`}>
+              <Link href={`/store/${product.id}`}>
                 <h3 className="font-semibold text-lg mb-1 hover:underline">{product.name}</h3>
               </Link>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">{product.description}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-2 line-clamp-5">{product.description}</p>
               <p className="font-bold">₦{product.price.toFixed(2)}</p>
             </div>
           </CardContent>

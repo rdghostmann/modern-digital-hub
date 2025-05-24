@@ -15,7 +15,7 @@ export async function getFeaturedBlogPosts() {
       if (!post) return null
       return {
         ...post,
-        _id: post._id.toString(),
+        id: post._id ? post._id.toString() : post.id,
         category: cat.name,
       }
     })
