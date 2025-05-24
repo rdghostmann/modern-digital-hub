@@ -6,17 +6,19 @@ import Image from "next/image"
 import { ArrowLeft, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useCart } from "@/components/cart-provider"
 import { toast } from "sonner"
+import { useCartStore } from "@/store/cart-store"
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, clearCart, getTotal } = useCart()
+  const items = useCartStore((state) => state.items)
+  const removeItem = useCartStore((state) => state.removeItem)
+  const updateQuantity = useCartStore((state) => state.updateQuantity)
+  const clearCart = useCartStore((state) => state.clearCart)
+  const getTotal = useCartStore((state) => state.getTotal)
   const [isCheckingOut, setIsCheckingOut] = useState(false)
 
   const handleCheckout = () => {
     setIsCheckingOut(true)
-
-    // Simulate checkout process
     setTimeout(() => {
       toast({
         title: "Order placed successfully!",
@@ -75,7 +77,7 @@ export default function CartPage() {
                           <div>
                             <h3 className="font-medium">{item.name}</h3>
                             <p className="text-sm text-slate-500 dark:text-slate-400">
-                              {item.description.substring(0, 60)}...
+                              {item.description?.substring(0, 60)}...
                             </p>
                           </div>
                         </div>
@@ -93,8 +95,8 @@ export default function CartPage() {
                           </div>
                         </div>
                       </td>
-                      <td className="p-4 text-right">${item.price.toFixed(2)}</td>
-                      <td className="p-4 text-right">${(item.price * item.quantity).toFixed(2)}</td>
+                      <td className="p-4 text-right">₦{item.price.toFixed(2)}</td>
+                      <td className="p-4 text-right">₦{(item.price * item.quantity).toFixed(2)}</td>
                       <td className="p-4 text-right">
                         <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)}>
                           <Trash2 className="h-4 w-4" />
@@ -115,7 +117,7 @@ export default function CartPage() {
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span>${getTotal().toFixed(2)}</span>
+                  <span>₦{getTotal().toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Shipping</span>
@@ -123,14 +125,14 @@ export default function CartPage() {
                 </div>
                 <div className="flex justify-between">
                   <span>Tax</span>
-                  <span>${(getTotal() * 0.1).toFixed(2)}</span>
+                  <span>₦{(getTotal() * 0.1).toFixed(2)}</span>
                 </div>
               </div>
 
               <div className="border-t pt-4 mb-6">
                 <div className="flex justify-between font-bold">
                   <span>Total</span>
-                  <span>${(getTotal() * 1.1).toFixed(2)}</span>
+                  <span>₦{(getTotal() * 1.1).toFixed(2)}</span>
                 </div>
               </div>
 

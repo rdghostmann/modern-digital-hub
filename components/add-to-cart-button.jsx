@@ -2,11 +2,11 @@
 
 import { Button } from "@/components/ui/button"
 import { ShoppingCart } from "lucide-react"
-import { useCart } from "@/components/cart-provider"
 import { toast } from "sonner"
+import { useCartStore } from "@/store/cart-store"
 
 export function AddToCartButton({ product }) {
-  const { addItem } = useCart()
+  const addItem = useCartStore((state) => state.addItem)
 
   const handleAddToCart = () => {
     addItem(product)

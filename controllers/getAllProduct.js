@@ -8,6 +8,6 @@ export async function getAllProducts() {
   const products = await Product.find().lean()
   return products.map(product => ({
     ...product,
-    _id: product._id.toString(),
+    id: product._id ? product._id.toString() : product.id,
   }))
 }

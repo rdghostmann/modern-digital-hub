@@ -2,7 +2,6 @@ import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { CartProvider } from "@/components/cart-provider"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 
@@ -20,14 +19,13 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <CartProvider>
             <div className="flex min-h-screen flex-col">
               <Header />
               <main className="flex-1">{children}</main>
               <Toaster />
               <Footer />
             </div>
-          </CartProvider>
+    
         </ThemeProvider>
       </body>
     </html>
