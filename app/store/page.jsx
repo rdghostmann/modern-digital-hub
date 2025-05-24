@@ -24,9 +24,9 @@ export default async function StorePage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <Card key={product._id} className="overflow-hidden">
+          <Card key={product.id} className="overflow-hidden">
             <CardContent className="p-0">
-              <Link href={`/store/${product._id}`}>
+              <Link href={`/store/${product.id}`}>
                 <div className="relative h-48 w-full">
                   <Image
                     src={product.image || "/placeholder.svg"}
@@ -35,11 +35,11 @@ export default async function StorePage() {
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 33vw"
                     priority
-                  />               
-                   </div>
+                  />
+                </div>
               </Link>
               <div className="p-4">
-                <Link href={`/store/${product._id}`}>
+                <Link href={`/store/${product.id}`}>
                   <h3 className="font-semibold text-lg mb-1 hover:underline">{product.name}</h3>
                 </Link>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mb-2 line-clamp-3">{product.description}</p>

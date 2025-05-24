@@ -2,18 +2,22 @@
 
 import { Button } from "@/components/ui/button"
 import { ShoppingCart } from "lucide-react"
-import { toast } from "sonner"
+// import { toast } from "sonner"
 import { useCartStore } from "@/store/cart-store"
+// import { useToast } from "@/hooks/use-toast";
+
+
 
 export function AddToCartButton({ product }) {
+  // const { toast } = useToast();
   const addItem = useCartStore((state) => state.addItem)
 
   const handleAddToCart = () => {
     addItem(product)
-    toast({
-      title: "Added to cart",
-      description: `${product.name} has been added to your cart.`,
-    })
+    // toast({
+    //   title: "Added to cart",
+    //   description: `${product.name} has been added to your cart.`,
+    // })
   }
 
   return (

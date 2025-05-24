@@ -3,19 +3,15 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, ShoppingCart, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Badge } from "@/components/ui/badge"
 import { CartSidebar } from "./CartSidebar/CartSidebar"
-import { useCartStore } from "@/store/cart-store"
+import Cart from "./CartItem/Cart"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
-  const openCart = useCartStore((state) => state.openCart)
-  const items = useCartStore((state) => state.items)
-
 
   const routes = [
     { href: "/", label: "Home" },
@@ -40,8 +36,9 @@ export default function Header() {
               <Link
                 key={route.href}
                 href={route.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${pathname === route.href ? "text-primary" : "text-muted-foreground"
-                  }`}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  pathname === route.href ? "text-primary" : "text-muted-foreground"
+                }`}
               >
                 {route.label}
               </Link>
@@ -49,20 +46,8 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Button className="relative" onClick={openCart} aria-label="Open cart">
-              <ShoppingCart className="h-5 w-5" />
-              {items.length > 0 && (
-                <Badge
-                  variant="destructive"
-                  className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs"
-                >
-                  {items.length}
-                </Badge>
-              )}
-            </Button>
+            <Cart />
             <ThemeToggle />
-
-            {/* Mobile Menu Button */}
             <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
@@ -98,7 +83,6 @@ export default function Header() {
         )}
       </header>
       <CartSidebar />
-
     </>
   )
 }

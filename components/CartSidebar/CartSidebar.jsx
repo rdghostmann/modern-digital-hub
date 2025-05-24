@@ -7,7 +7,7 @@ import { Trash2, X } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
-// Wrap the component in a dynamic import with ssr: false
+// Move the component logic into a separate function
 function CartSidebarComponent() {
   const cartOpen = useCartStore((state) => state.cartOpen)
   const closeCart = useCartStore((state) => state.closeCart)
@@ -86,7 +86,7 @@ function CartSidebarComponent() {
               <span className="font-bold">₦{getTotal().toFixed(2)}</span>
             </div>
             <Button asChild className="w-full mb-2" disabled={items.length === 0}>
-              <Link href="/cart" onClick={closeCart}>Checkout</Link>
+              <Link href="/checkout" onClick={closeCart}>Checkout</Link>
             </Button>
             <Button variant="outline" className="w-full" onClick={clearCart} disabled={items.length === 0}>
               Clear Cart
@@ -98,5 +98,5 @@ function CartSidebarComponent() {
   )
 }
 
-// Export as dynamic with ssr: false
+// Export as dynamic to disable SSR and fix hydration errors
 export const CartSidebar = dynamic(() => Promise.resolve(CartSidebarComponent), { ssr: false })
