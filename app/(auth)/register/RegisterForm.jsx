@@ -36,7 +36,6 @@ const RegisterForm = () => {
       const confirmPassword = formData.get('confirmPassword');
       const phone = formData.get('phone');
       const role = formData.get('role');
-      const isActive = formData.get('isActive');
 
       if (password !== confirmPassword) {
         toast({
@@ -47,7 +46,7 @@ const RegisterForm = () => {
         return;
       }
 
-      const response = await registerUser({ username, email, password, phone, role, isActive });
+      const response = await registerUser({ username, email, password, phone, role });
 
       if (response?.success) {
         toast({
@@ -74,10 +73,10 @@ const RegisterForm = () => {
   };
 
   return (
-    <section className="min-h-screen bg-[#0e100f] flex items-center justify-center px-4">
+      <section className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="bg-[#1a1c1a] w-full max-w-md p-8 rounded-2xl shadow-lg">
-        <h2 className="text-xl font-bold text-white text-center mb-6">Create a DAC Manager Account</h2>
-        <p className="text-sm text-gray-400 text-center mb-8">Onboard a Daily Saving's Manager Account </p>
+          <h2 className="text-3xl font-bold text-white text-center mb-6">Sign in</h2>
+        <p className="text-lg text-gray-400 text-center mb-8">Enter your email and password to access your accoun</p>
 
         <form
           action={handleSubmit}

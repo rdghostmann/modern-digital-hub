@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import { connectToDB } from "@/lib/connectDB"
-import VBlog from "@/models/VBlog"
-import { videos } from "@/lib/video"
+import BlogPost from "@/models/BlogPost"
+import { mockBlogPosts } from "@/lib/mockBlogPosts"
 
 export const dynamic = "force-dynamic"
 
@@ -11,13 +11,14 @@ export default async function SeedPage() {
 
   try {
     await connectToDB()
-    await VBlog.deleteMany()
-    // Convert string dates to Date objects for MongoDB
-    const videoDocs = videos.map(video => ({
-      ...video,
-      date: new Date(video.date),
-    }))
-    await VBlog.insertMany(videoDocs)
+    status = "loading"
+
+    // Optional: Clear existing blog posts
+    await BlogPost.deleteMany({})
+
+    // Seed blog posts
+    await BlogPost.insertMany(mockBlogPosts)
+
     status = "done"
     mongoose.disconnect()
   } catch (err) {
@@ -28,7 +29,12 @@ export default async function SeedPage() {
   return (
     <div>
       <h1>Seed Database</h1>
-      {status === "done" && <p style={{ color: "green" }}>Seeding complete!</p>}
+      {status === "done" && (
+        <p style={{ color: "green" }}>
+          Seeding complete!<br />
+          Blog posts have been seeded.
+        </p>
+      )}
       {status === "error" && <p style={{ color: "red" }}>Error: {error}</p>}
       {status === "idle" && <p>Ready to seed.</p>}
     </div>

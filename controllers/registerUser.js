@@ -4,85 +4,10 @@ import { connectToDB } from "@/lib/connectDB";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import User from "@/models/User";
-import { sendMagicLink } from "@/lib/sendEmail";
-import Otp from "@/models/Otp";
 
-const verificationEmailTemplate = (verificationLink, otp) => {
-  return `
-    <html>
-    <head>
-      <style>
-        body {
-          font-family: Arial, sans-serif;
-          background-color: #f2f2f2;
-          margin: 0;
-          padding: 0;
-        }
-
-        .container {
-          max-width: 600px;
-          margin: 0 auto;
-          padding: 20px;
-          background-color: #ffffff;
-          border-radius: 10px;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-          margin-top: 50px;
-        }
-
-        h1 {
-          color: #333333;
-          text-align: center;
-        }
-
-        p {
-          color: #666666;
-          line-height: 1.5;
-
-          span {
-          fobt-weight: bold;
-          color: #333333;
-          font-size: 1.2em;
-          }
-        }
-
-        a.button {
-          display: block;
-          margin: 0 auto;
-          padding: 10px 20px;
-          background-color: #007bff;
-          color: #fff;
-          text-decoration: none;
-          border-radius: 5px;
-          text-align: center;
-        }
-
-        .expire-time {
-          text-align: center;
-          margin-top: 10px;
-          color: #999999;
-        }
-
-        .button:hover {
-          background-color: #0056b3;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>Verify Your Email Address</h1>
-        <p>Thank you for signing up!</p>
-        <p>To complete your registration, please click the button below to verify your 
-        email address and Your OTP code is <span>${otp}</span> to activate your account</p>
-        <a href=${verificationLink} class="button">Verify Email</a>
-        <p class="expire-time">This link will expire in 10 minutes.</p>
-      </div>
-    </body>
-    </html>
-  `;
-};
 
 // Server action for registering a user
-export async function registerUser({ username, email, password, phone, country, state, city }) {
+export async function registerUser({ username, email, password, phone }) {
 
   try {
     // Connect to the MongoDB database
@@ -119,46 +44,18 @@ export async function registerUser({ username, email, password, phone, country, 
       email,
       password: hashedPassword,
       phone,
-      isVerified: false,
+      role: "user", // Default role
+      status: "active", // Default status
     });
 
-  
-    // Generate verification token and save the user
-    const verificationToken = newUser.getVerificationToken();
-    await newUser.save();
-
-    // Function to generate a 6-digit OTP
-    const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
-    const otp = generateOtp();
-
-    // Hash the OTP and save it in the database
-    const hashedOtp = await bcrypt.hash(otp, 10);
-
-    // Create a new OTP record in the database
-    const newOtp = new Otp({
-      userId: newUser._id,
-      email: newUser.email,
-      phoneNumber: newUser.phone,
-      otp: hashedOtp,
-    });
-    await newOtp.save();
-
-    
-    // Generate verification link
-    const verificationLink = `${process.env.NEXT_PUBLIC_URL}/verify-email?verifyToken=${verificationToken}&id=${newUser?._id}`;
-
-    // Send verification email and OTP to the user E
-    const message = verificationEmailTemplate(verificationLink, otp);
-    
-    await sendMagicLink(newUser?.email, "Email Verification", message);
-
+      await newUser.save();
 
     return {
       success: true,
-      message: "User registered and wallets created successfully",
+      message: "User registered and created successfully",
     };
   } catch (error) {
     console.error("Error registering user:", error);
-    return { success: false, message: "Error creating user and wallets" };
+    return { success: false, message: "Error creating user " };
   }
 }

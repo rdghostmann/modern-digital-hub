@@ -17,17 +17,35 @@ const BlogPostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  author: {
+  authorId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
+  authorName: {
     type: String,
     required: true
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId, ref: "Category"
+    type: String,
+    enum: [
+      "Movies",
+      "Music",
+      "TV Shows",
+      "Film Industry",
+      "Gaming",
+      "Pop Culture"
+    ],
+    required: true
+  },
+  status: {
+    type: String,
+    required: true
   },
   image: {
     type: String
   },
-})
+}, { timestamps: true })
 
 const BlogPost = mongoose.models.BlogPost || mongoose.model("BlogPost", BlogPostSchema)
 export default BlogPost

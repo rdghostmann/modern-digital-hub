@@ -1,12 +1,9 @@
 // User Model
 import mongoose from "mongoose";
+import crypto from "crypto";
 
 const UserSchema = new mongoose.Schema(
   {
-    userID: {
-      type: String,
-      required: true,
-    },
     username: {
       type: String,
       required: true,
@@ -26,10 +23,6 @@ const UserSchema = new mongoose.Schema(
       minlength: [6, 'Password must be at least 6 characters'],
       select: false // Don't return password by default
     },
-    phone: {
-      type: String,
-      default: null,
-    },
     country: {
       type: String,
       default: null,
@@ -38,15 +31,29 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    phone: {
+      type: String,
+      default: true,
+    },
     role: {
       type: String,
-      enum: ["user", "superAdmin", "admin", "writer", "editor"],
+      enum: ["user", "superAdmin", "admin", "editor"],
       default: "user",
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    }, // For Magic Link verification
+    verifyToken: {
+      type: String,
+    },
+    verifyTokenExpire: {
+      type: Date,
     },
     status: {
       type: String,
       enum: ["active", "inactive"],
-      default: "active",
+      default: "inactive",
     },
   },
   {
@@ -54,6 +61,17 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
+UserSchema.methods.getVerificationToken = function () {
+  // Generate the token
+  const verificationToken = crypto.randomBytes(32).toString("hex");
+
+  // Hash the token
+  this.verifyToken = crypto.createHash("sha256").update(verificationToken).digest("hex");
+
+  this.verifyTokenExpire = new Date(Date.now() + 30 * 60 * 1000);
+
+  return verificationToken;
+};
 
 // Fix the model export
 const User = mongoose.models?.User || mongoose.model("User", UserSchema);
