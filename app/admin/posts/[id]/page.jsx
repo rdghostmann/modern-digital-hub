@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function BlogPostPage({ params }) {
+export default async function AdminUserPostPage({ params }) {
   const post = await getPost(params.id)
 
   if (!post) {
@@ -30,9 +30,9 @@ export default async function BlogPostPage({ params }) {
   return (
     <div className="container mx-auto py-8 md:py-12">
       <Button asChild variant="ghost" className="mb-6">
-        <Link href="/blog" className="flex items-center">
+        <Link href="/admin/posts" className="flex items-center">
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Blog
+          Back to Posts List
         </Link>
       </Button>
 

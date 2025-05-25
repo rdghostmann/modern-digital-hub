@@ -55,7 +55,7 @@ export default function AdminPostsPage({ posts }) {
                                             <td className="p-4">{post.date}</td>
                                             <td className="p-4">
                                                 <div className="flex justify-end space-x-2">
-                                                    <Button variant="ghost" size="icon" onClick={() => router.push(`/posts/${post.id}`)}>
+                                                    <Button variant="ghost" size="icon" onClick={() => router.push(`/admin/posts/${post.id}`)}>
                                                         <Eye className="h-4 w-4" />
                                                     </Button>
                                                     <Button variant="ghost" size="icon" onClick={() => {}}>
