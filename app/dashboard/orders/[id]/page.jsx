@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,10 +5,19 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Package, Truck, CheckCircle, MapPin } from "lucide-react"
 import DashboardLayout from "@/components/dashboard-layout"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/auth"
+import { getOrder } from "@/controllers/getOrders"
 
-export default function OrderDetailsPage({ params }) {
+export default async function OrderDetailsPage({ params }) {
+  const session = await getServerSession(authOptions)
+  const userId = session?.user?.id
+  const orderId = params.id
 
-  const userOrders = getUserOrders(user.id)
+  let order = null
+  if (userId && orderId) {
+    order = await getOrder(orderId, userId)
+  }
 
   if (!order) {
     return (
@@ -138,8 +145,8 @@ export default function OrderDetailsPage({ params }) {
                         <p className="text-sm text-gray-500">Quantity: {item.quantity}</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-medium">${(item.price * item.quantity).toFixed(2)}</p>
-                        <p className="text-sm text-gray-500">${item.price.toFixed(2)} each</p>
+                        <p className="font-medium">₦{(item.price * item.quantity).toFixed(2)}</p>
+                        <p className="text-sm text-gray-500">₦{item.price.toFixed(2)} each</p>
                       </div>
                     </div>
                   ))}
@@ -158,7 +165,7 @@ export default function OrderDetailsPage({ params }) {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span>Subtotal</span>
-                    <span>${order.total.toFixed(2)}</span>
+                    <span>₦{order.total.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Shipping</span>
@@ -166,12 +173,12 @@ export default function OrderDetailsPage({ params }) {
                   </div>
                   <div className="flex justify-between">
                     <span>Tax</span>
-                    <span>${(order.total * 0.1).toFixed(2)}</span>
+                    <span>₦{(order.total * 0.1).toFixed(2)}</span>
                   </div>
                   <div className="border-t pt-2">
                     <div className="flex justify-between font-bold">
                       <span>Total</span>
-                      <span>${(order.total * 1.1).toFixed(2)}</span>
+                      <span>₦{(order.total * 1.1).toFixed(2)}</span>
                     </div>
                   </div>
                 </div>

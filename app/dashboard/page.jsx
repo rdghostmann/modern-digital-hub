@@ -6,35 +6,33 @@ import { Badge } from "@/components/ui/badge"
 import DashboardLayout from "@/components/dashboard-layout"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/auth"
-
-// Mock orders array for demonstration
-const userOrders = [
-  {
-    id: "ORD-001",
-    status: "delivered",
-    items: [{ name: "Wireless Headphones" }, { name: "Smart Watch" }],
-    total: 494.98,
-    orderDate: "2025-05-10",
-  },
-  {
-    id: "ORD-002",
-    status: "shipped",
-    items: [{ name: "Mechanical Keyboard" }],
-    total: 285.98,
-    orderDate: "2025-05-18",
-  },
-  {
-    id: "ORD-003",
-    status: "processing",
-    items: [{ name: "Wireless Mouse" }],
-    total: 87.99,
-    orderDate: "2025-05-20",
-  },
-]
+import { getOrdersStats, getAllOrders } from "@/controllers/getOrders"
 
 export default async function page() {
   const session = await getServerSession(authOptions)
   const user = session?.user || { name: "User" }
+  const userId = user.id
+
+  // Fetch all orders and stats for the user
+  const userOrders = userId ? await getAllOrders(userId) : []
+  const statsData = userId ? await getOrdersStats(userId) : { totalOrders: 0, totalSpent: 0 }
+
+  const stats = [
+    {
+      title: "Total Orders",
+      value: statsData.totalOrders,
+      description: "All time orders",
+      icon: ShoppingBag,
+      color: "text-blue-600",
+    },
+    {
+      title: "Total Spent",
+      value: `₦${statsData.totalSpent.toFixed(2)}`,
+      description: "Lifetime spending",
+      icon: Package,
+      color: "text-green-600",
+    },
+  ]
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -61,23 +59,6 @@ export default async function page() {
         return "text-gray-600"
     }
   }
-
-  const stats = [
-    {
-      title: "Total Orders",
-      value: userOrders.length,
-      description: "All time orders",
-      icon: ShoppingBag,
-      color: "text-blue-600",
-    },
-    {
-      title: "Total Spent",
-      value: `$${userOrders.reduce((sum, order) => sum + order.total, 0).toFixed(2)}`,
-      description: "Lifetime spending",
-      icon: Package,
-      color: "text-green-600",
-    },
-  ]
 
   // Show up to 3 recent orders
   const recentOrders = userOrders.slice(0, 3)
