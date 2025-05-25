@@ -1,7 +1,5 @@
 "use client"
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,13 +7,10 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Package, Truck, CheckCircle, MapPin } from "lucide-react"
 import DashboardLayout from "@/components/dashboard-layout"
-import { useAuth } from "@/components/auth-provider"
-import { useOrders } from "@/components/order-provider"
 
 export default function OrderDetailsPage({ params }) {
 
   const userOrders = getUserOrders(user.id)
-  const order = userOrders.find((o) => o.id === params.id)
 
   if (!order) {
     return (

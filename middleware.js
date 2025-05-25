@@ -17,27 +17,22 @@ export async function middleware(req) {
 
   // User restrictions: Can only access /dashboard
   if (userRole === "user") {
-    if (url.pathname.startsWith("/admin")) {
+    if (!url.pathname.startsWith("/dashboard")) {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
   }
 
-  // Admin restrictions: Only allow /admin, /admin/users, /admin/posts, /admin/analytics
+  // Admin restrictions: Can only access /admin
   if (userRole === "admin") {
-    const allowedAdminPaths = [
-      "/admin",
-      "/admin/users",
-      "/admin/posts",
-      "/admin/analytics"
-    ];
-    // If trying to access /dashboard, /login, /register, or any non-allowed /admin subpage, redirect to /admin
-    if (
-      url.pathname === "/dashboard" ||
-      url.pathname === "/login" ||
-      url.pathname === "/register" ||
-      (url.pathname.startsWith("/admin") && !allowedAdminPaths.includes(url.pathname))
-    ) {
+    if (!url.pathname.startsWith("/admin")) {
       return NextResponse.redirect(new URL("/admin", req.url));
+    }
+  }
+
+  // Writer restrictions: Can only access /writer
+  if (userRole === "writer") {
+    if (!url.pathname.startsWith("/writer")) {
+      return NextResponse.redirect(new URL("/writer", req.url));
     }
   }
 
@@ -46,5 +41,5 @@ export async function middleware(req) {
 
 // Apply middleware only to relevant routes
 export const config = {
-  matcher: ["/admin/:path*", "/dashboard", "/login", "/register"],
+  matcher: ["/admin/:path*", "/dashboard/:path*", "/writer/:path*", "/login", "/register"],
 };

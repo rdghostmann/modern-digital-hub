@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Trash2, Edit, Eye } from "lucide-react"
 import DashboardLayout from "@/components/dashboard-layout"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 export default function AdminPostsPage({ posts }) {
     const router = useRouter();
@@ -55,13 +56,15 @@ export default function AdminPostsPage({ posts }) {
                                             <td className="p-4">{post.date}</td>
                                             <td className="p-4">
                                                 <div className="flex justify-end space-x-2">
-                                                    <Button variant="ghost" size="icon" onClick={() => router.push(`/admin/posts/${post.id}`)}>
-                                                        <Eye className="h-4 w-4" />
-                                                    </Button>
-                                                    <Button variant="ghost" size="icon" onClick={() => {}}>
+                                                    <Link href={`/admin/posts/${post.id}`} passHref legacyBehavior>
+                                                        <Button as="a" variant="ghost" size="icon" className="flex items-center">
+                                                            <Eye className="h-4 w-4" />
+                                                        </Button>
+                                                    </Link>
+                                                    <Button variant="ghost" size="icon" onClick={() => { }}>
                                                         <Edit className="h-4 w-4" />
                                                     </Button>
-                                                    <Button variant="ghost" size="icon" onClick={() => {}}>
+                                                    <Button variant="ghost" size="icon" onClick={() => { }}>
                                                         <Trash2 className="h-4 w-4" />
                                                     </Button>
                                                 </div>
