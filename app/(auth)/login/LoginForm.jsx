@@ -95,7 +95,7 @@ const LoginForm = () => {
         });
       } else {
         toast({
-          title: "Login Successful",
+          title: "Login Successful, please wait ",
           description: "Redirecting to your dashboard...",
         });
         router.push("/admin");
