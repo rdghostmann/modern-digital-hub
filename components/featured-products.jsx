@@ -7,7 +7,7 @@ import { getFeaturedProducts } from "@/controllers/getFeaturedProduct"
 export default async function FeaturedProducts() {
   const featuredProducts = await getFeaturedProducts();
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
       {featuredProducts.map((product) => (
         <Card key={product.id} className="overflow-hidden">
           <CardContent className="p-0">
