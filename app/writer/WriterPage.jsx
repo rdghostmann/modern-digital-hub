@@ -1,6 +1,5 @@
-"use client"
-
-import { useRouter } from "next/navigation"
+// writer/WriterPage.jsx
+import React from "react"
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -8,31 +7,28 @@ import { FileText, PlusCircle, Eye, Edit } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import DashboardLayout from "@/components/dashboard-layout"
 
-export default function WriterDashboard({user, myPosts, stats}) {
-const router = useRouter()
-
-  const myPosts = getPostsByAuthor(user.id)
-  const publishedPosts = myPosts.filter((post) => post.status === "published")
-  const draftPosts = myPosts.filter((post) => post.status === "draft")
+export default function WriterDashboard({ user, posts }) {
+  const publishedPosts = posts?.filter((post) => post.status === "published") || []
+  const draftPosts = posts?.filter((post) => post.status === "draft") || []
 
   const stats = [
     {
       title: "Total Posts",
-      value: myPosts.length,
+      value: posts?.length || 0,
       description: "All your posts",
       icon: FileText,
       color: "text-blue-600",
     },
     {
       title: "Published",
-      value: publishedPosts.length,
+      value: publishedPosts?.length || 0,
       description: "Live posts",
       icon: Eye,
       color: "text-green-600",
     },
     {
       title: "Drafts",
-      value: draftPosts.length,
+      value: draftPosts?.length || 0,
       description: "Unpublished posts",
       icon: Edit,
       color: "text-orange-600",
@@ -81,7 +77,7 @@ const router = useRouter()
             <CardDescription>Your latest blog posts</CardDescription>
           </CardHeader>
           <CardContent>
-            {myPosts.length === 0 ? (
+            {posts.length === 0 ? (
               <div className="text-center py-8">
                 <FileText className="mx-auto h-12 w-12 text-gray-400" />
                 <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">No posts yet</h3>
@@ -97,13 +93,15 @@ const router = useRouter()
               </div>
             ) : (
               <div className="space-y-4">
-                {myPosts.slice(0, 5).map((post) => (
+                {posts.slice(0, 5).map((post) => (
                   <div key={post.id} className="flex items-center justify-between p-4 border rounded-lg">
                     <div>
                       <h3 className="font-medium">{post.title}</h3>
                       <p className="text-sm text-gray-500">{post.excerpt}</p>
                       <div className="flex items-center gap-2 mt-2">
-                        <Badge variant={post.status === "published" ? "default" : "secondary"}>{post.status}</Badge>
+                        <Badge variant={post.status === "published" ? "default" : "secondary"}>
+                          {post.status}
+                        </Badge>
                         <span className="text-xs text-gray-500">{post.date}</span>
                       </div>
                     </div>

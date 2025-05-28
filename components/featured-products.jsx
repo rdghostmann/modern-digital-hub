@@ -7,7 +7,7 @@ import { getFeaturedProducts } from "@/controllers/getFeaturedProduct"
 export default async function FeaturedProducts() {
   const featuredProducts = await getFeaturedProducts();
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {featuredProducts.map((product) => (
         <Card key={product.id} className="overflow-hidden">
           <CardContent className="p-0">
@@ -20,7 +20,7 @@ export default async function FeaturedProducts() {
               <Link href={`/store/${product.id}`}>
                 <h3 className="font-semibold text-lg lg:text-sm mb-1 hover:underline">{product.name}</h3>
               </Link>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mb-2 lg:line-clamp-5">{product.description}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-2 line-clamp-3">{product.description}</p>
               <p className="font-bold">₦{product.price.toFixed(2)}</p>
             </div>
           </CardContent>

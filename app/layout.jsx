@@ -17,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={inter.className} cz-shortcut-listen="true">
         <SessionWrapper>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="flex min-h-screen flex-col">
