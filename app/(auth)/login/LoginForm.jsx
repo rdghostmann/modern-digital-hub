@@ -31,18 +31,27 @@ function QuoteCarousel() {
   React.useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % quotes.length);
+<<<<<<< HEAD
     }, 4000);
+=======
+    }, 6000); // every 6 seconds
+>>>>>>> 2af3aa9b9dc90272bf168a256af7d04f4310d504
     return () => clearInterval(timer);
   }, []);
 
   return (
+<<<<<<< HEAD
     <div className="relative h-48 flex flex-col justify-center items-center px-6">
+=======
+    <div className="relative w-full h-32 md:h-40 flex flex-col justify-center items-center px-6 overflow-hidden">
+>>>>>>> 2af3aa9b9dc90272bf168a256af7d04f4310d504
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -30 }}
+<<<<<<< HEAD
           transition={{ duration: 0.6 }}
           className="absolute w-full"
         >
@@ -50,6 +59,15 @@ function QuoteCarousel() {
             {quotes[index].text}
           </blockquote>
           <div className="mt-4 text-yellow-300 text-center font-medium">
+=======
+          transition={{ duration: 0.7 }}
+          className="absolute w-full text-center"
+        >
+          <blockquote className="text-xl md:text-2xl font-semibold text-white drop-shadow-lg">
+            {quotes[index].text}
+          </blockquote>
+          <div className="mt-2 text-yellow-300 font-medium">
+>>>>>>> 2af3aa9b9dc90272bf168a256af7d04f4310d504
             — {quotes[index].author}
           </div>
         </motion.div>
@@ -95,7 +113,11 @@ const LoginForm = () => {
         });
       } else {
         toast({
+<<<<<<< HEAD
           title: "Login Successful",
+=======
+          title: "Login Successful, please wait ",
+>>>>>>> 2af3aa9b9dc90272bf168a256af7d04f4310d504
           description: "Redirecting to your dashboard...",
         });
         router.push("/admin");
@@ -114,15 +136,26 @@ const LoginForm = () => {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
       {/* <div className="w-full max-w-2xl md:max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-2xl overflow-hidden bg-background"> */}
+<<<<<<< HEAD
       <div className="w-full h-full flex flex-col md:flex-row shadow-2xl rounded-2xl overflow-hidden bg-background">
+=======
+      <div className="w-full h-full flex flex-col md:flex-row shadow-2xl overflow-hidden bg-background">
+>>>>>>> 2af3aa9b9dc90272bf168a256af7d04f4310d504
         {/* Left: Carousel & Image (hidden on small screens) */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
+<<<<<<< HEAD
           transition={{ duration: 0.7 }}
           className="hidden md:flex flex-col justify-between items-center bg-gradient-to-br from-yellow-700 via-yellow-900 to-gray-900 md:w-1/2 relative"
         >
           <div className="absolute inset-0">
+=======
+          transition={{ duration: 0.6 }}
+          className="hidden md:flex flex-col justify-between items-center bg-gradient-to-br from-yellow-700 via-yellow-900 to-gray-900 md:w-1/2 relative"
+        >
+          <div className="absolute inset-0 z-0">
+>>>>>>> 2af3aa9b9dc90272bf168a256af7d04f4310d504
             <img
               src="/login-bg.jpg"
               alt="Writer background"
@@ -131,14 +164,27 @@ const LoginForm = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80" />
           </div>
+<<<<<<< HEAD
           <div className="relative z-10 flex-1 flex flex-col justify-center">
             <QuoteCarousel />
           </div>
+=======
+
+          <div className="relative z-10 flex-1 flex flex-col justify-center w-full">
+            <QuoteCarousel />
+          </div>
+
+>>>>>>> 2af3aa9b9dc90272bf168a256af7d04f4310d504
           <div className="relative z-10 mb-8 text-center text-gray-300 text-xs">
             &copy; {new Date().getFullYear()} BlogStore. Write. Share. Inspire.
           </div>
         </motion.div>
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2af3aa9b9dc90272bf168a256af7d04f4310d504
         {/* Right: Login Form */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
