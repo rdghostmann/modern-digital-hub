@@ -150,13 +150,8 @@ const RegisterForm = () => {
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
                 <SelectContent>
-<<<<<<< HEAD
                   <SelectItem value="user">User</SelectItem>
                   <SelectItem value="writer">Writer</SelectItem>
-=======
-                  <SelectItem value="staff">Staff</SelectItem>
-                  <SelectItem value="manager">Manager</SelectItem>
->>>>>>> 2af3aa9b9dc90272bf168a256af7d04f4310d504
                   <SelectItem value="admin">Admin</SelectItem>
                 </SelectContent>
               </Select>
