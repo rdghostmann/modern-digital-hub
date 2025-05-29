@@ -1,54 +1,10 @@
-"use client"
-
-import { useEffect, useState } from "react"
-import { ThumbsUp, ThumbsDown } from "lucide-react"
+// featured-video.jsx
 import { Card, CardContent } from "./ui/card"
-import { Button } from "./ui/button"
 import { getFeaturedVideo } from "@/controllers/getFeaturedVideo"
+import UserReactBtn from "./UserReactBtn/UserReactBtn"
 
-export default function FeaturedVideo() {
-  const [video, setVideo] = useState(null)
-  const [likes, setLikes] = useState(0)
-  const [dislikes, setDislikes] = useState(0)
-  const [userAction, setUserAction] = useState(null)
-
-  useEffect(() => {
-    async function fetchVideo() {
-      const data = await getFeaturedVideo()
-      setVideo(data)
-      if (data) {
-        setLikes(data.likes || 0)
-        setDislikes(data.dislikes || 0)
-      }
-    }
-    fetchVideo()
-  }, [])
-
-  const handleLike = () => {
-    if (userAction === "like") {
-      setLikes(likes - 1)
-      setUserAction(null)
-    } else {
-      setLikes(likes + 1)
-      if (userAction === "dislike") {
-        setDislikes(dislikes - 1)
-      }
-      setUserAction("like")
-    }
-  }
-
-  const handleDislike = () => {
-    if (userAction === "dislike") {
-      setDislikes(dislikes - 1)
-      setUserAction(null)
-    } else {
-      setDislikes(dislikes + 1)
-      if (userAction === "like") {
-        setLikes(likes - 1)
-      }
-      setUserAction("dislike")
-    }
-  }
+export default async function FeaturedVideo() {
+  const video = await getFeaturedVideo()
 
   if (!video) {
     return (
@@ -80,26 +36,12 @@ export default function FeaturedVideo() {
             <div className="text-sm text-slate-500 dark:text-slate-400">
               Posted on {new Date(video.date).toLocaleDateString()}
             </div>
-            <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                className={`flex items-center gap-1 ${userAction === "like" ? "text-primary" : ""}`}
-                onClick={handleLike}
-              >
-                <ThumbsUp className="h-4 w-4" />
-                <span>{likes}</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className={`flex items-center gap-1 ${userAction === "dislike" ? "text-primary" : ""}`}
-                onClick={handleDislike}
-              >
-                <ThumbsDown className="h-4 w-4" />
-                <span>{dislikes}</span>
-              </Button>
-            </div>
+
+            {/* Client Component for Interactivity */}
+            <UserReactBtn
+              initialLikes={video.likes || 0}
+              initialDislikes={video.dislikes || 0}
+            />
           </div>
         </div>
       </CardContent>
