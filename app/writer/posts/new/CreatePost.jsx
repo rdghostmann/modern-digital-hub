@@ -1,71 +1,92 @@
-'use client'
+'use client';
 
-import { useState, useTransition } from "react"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner"
+import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css';
+import { toast } from 'sonner';
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
-} from "@/components/ui/select"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import DashboardLayout from "@/components/dashboard-layout"
-import { addPost } from "@/controllers/addPost" // server action
+  SelectValue,
+} from '@/components/ui/select';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import DashboardLayout from '@/components/dashboard-layout';
+import { addPost } from '@/controllers/addPost'; // server action
+
+// Dynamically import ReactQuill to prevent SSR issues
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+
+// Define Quill modules and formats
+const quillModules = {
+  toolbar: [
+    [{ header: [1, 2, false] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    ['link', 'image'],
+    ['clean'],
+  ],
+};
+
+const quillFormats = [
+  'header',
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'blockquote',
+  'list',
+  'bullet',
+  'link',
+  'image',
+];
 
 export default function CreatePost({ categories, user }) {
-  const router = useRouter()
-  const [isPending, startTransition] = useTransition()
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   const [formData, setFormData] = useState({
-    title: "",
-    excerpt: "",
-    content: "",
-    category: "",
-    image: "",
-  })
-
+    title: '',
+    excerpt: '',
+    content: '',
+    category: '',
+    image: '',
+  });
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!formData.title || !formData.excerpt || !formData.content || !formData.category) {
-      toast.error("All fields are required")
-      return
+      toast.error('All fields are required');
+      return;
     }
 
- if (!user?.id || !user?.username) {
-      toast.error("User is not authenticated properly.")
-      return
+    if (!user?.id || !user?.username) {
+      toast.error('User is not authenticated properly.');
+      return;
     }
-      console.log("Submitting formData:", {
-    ...formData,
-    authorId: user?.id,
-    authorName: user?.name,
-  })
 
     startTransition(async () => {
       const result = await addPost({
         ...formData,
         authorId: user.id,
         authorName: user.username,
-      })
+      });
 
       if (result?.success) {
-        toast.success("Post created successfully")
-        router.push("/writer/posts")
+        toast.success('Post created successfully');
+        router.push('/writer/posts');
       } else {
-        toast.error(result?.error || "Failed to create post")
+        toast.error(result?.error || 'Failed to create post');
       }
-    })
-  }
-
+    });
+  };
 
   return (
     <DashboardLayout role="writer">
@@ -95,12 +116,11 @@ export default function CreatePost({ categories, user }) {
 
               <div>
                 <Label htmlFor="excerpt">Excerpt</Label>
-                <Textarea
+                <Input
                   id="excerpt"
                   value={formData.excerpt}
                   onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
                   placeholder="Brief description of your post"
-                  rows={3}
                   required
                 />
               </div>
@@ -134,23 +154,24 @@ export default function CreatePost({ categories, user }) {
                 />
               </div>
 
-              <div>
+              <div className='h-48'>
                 <Label htmlFor="content">Content</Label>
-                <Textarea
-                  id="content"
+                <ReactQuill
+                  className='max-h-full'
+                  theme="snow"
                   value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                  onChange={(value) => setFormData({ ...formData, content: value })}
+                  modules={quillModules}
+                  formats={quillFormats}
                   placeholder="Write your blog post content here..."
-                  rows={15}
-                  required
                 />
               </div>
 
               <div className="flex space-x-4">
                 <Button type="submit" disabled={isPending}>
-                  {isPending ? "Creating..." : "Create Post"}
+                  {isPending ? 'Creating...' : 'Create Post'}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => router.push("/writer/posts")}>
+                <Button type="button" variant="outline" onClick={() => router.push('/writer/posts')}>
                   Cancel
                 </Button>
                 <Button type="button" variant="outline" onClick={() => { }}>
@@ -162,5 +183,5 @@ export default function CreatePost({ categories, user }) {
         </Card>
       </div>
     </DashboardLayout>
-  )
+  );
 }
