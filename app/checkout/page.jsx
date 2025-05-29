@@ -1,3 +1,4 @@
+// app/checkout/page.jsx
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/auth"
 import { redirect } from "next/navigation"
@@ -10,5 +11,7 @@ export default async function Checkout() {
     redirect("/login")
   }
 
-  return <CheckoutPage />
+  const { username, email } = session.user
+
+  return <CheckoutPage username={username} email={email} />
 }
