@@ -1,16 +1,27 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import React, { Suspense } from "react";
 import { getAllBlogPosts } from "@/controllers/getAllBlogPost"
+import BlogPage from "./BlogPage"
 
 export const metadata = {
   title: "Blog | Modern Web App",
   description: "Read our latest articles and insights on web development, design, and technology.",
 }
 
-export default async function BlogPage() {
+export default async function Page() {
   const blogPosts = await getAllBlogPosts();
+
+  if (!blogPosts || blogPosts.length === 0) {
+    return (
+      <div className="container mx-auto py-12 text-center">
+        <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+          Our Blog
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400">
+          No blog posts available at the moment. Please check back later.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto py-8 md:py-12">
@@ -20,32 +31,13 @@ export default async function BlogPage() {
           Stay updated with our latest articles and insights on web development, design, and technology.
         </p>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {blogPosts.map((post) => (
-          <Card key={post.id} className="overflow-hidden">
-            <CardContent className="p-0">
-              <Link href={`/blog/${post.id}`}>
-                <div className="relative h-48 w-full">
-                  <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
-                </div>
-              </Link>
-              <div className="p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <Badge variant="secondary">{post.category}</Badge>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">
-                    {post.date ? new Date(post.date).toLocaleDateString() : ""}
-                  </span>
-                </div>
-                <Link href={`/blog/${post.id}`}>
-                  <h3 className="font-semibold text-lg mb-2 hover:underline">{post.title}</h3>
-                </Link>
-                <p className="text-sm text-slate-500 dark:text-slate-400">{post.excerpt}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <Suspense fallback={
+        <div className="flex justify-center items-center h-64">
+          <p className="text-gray-500">Loading blog posts...</p>
+        </div>
+      }>
+        <BlogPage blogPosts={blogPosts} />
+      </Suspense>
     </div>
   )
 }
