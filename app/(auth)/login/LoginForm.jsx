@@ -1,14 +1,14 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { Loader } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { toast } from "sonner";
 
 const quotes = [
   {
@@ -28,28 +28,28 @@ const quotes = [
 function QuoteCarousel() {
   const [index, setIndex] = useState(0);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % quotes.length);
-    }, 4000);
+    }, 6000); // every 6 seconds
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="relative w-full h-48 flex flex-col justify-center items-center px-6 overflow-hidden">
-      <AnimatePresence mode="wait" initial={false}>
+    <div className="relative w-full h-32 md:h-40 flex flex-col justify-center items-center px-6 overflow-hidden">
+      <AnimatePresence mode="wait">
         <motion.div
           key={index}
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -100 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="absolute w-full"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -30 }}
+          transition={{ duration: 0.7 }}
+          className="absolute w-full text-center"
         >
-          <blockquote className="w-full text-xl md:text-2xl font-semibold text-white text-center drop-shadow-lg">
+          <blockquote className="text-xl md:text-2xl font-semibold text-white drop-shadow-lg">
             {quotes[index].text}
           </blockquote>
-          <div className="mt-4 text-yellow-300 text-center font-medium">
+          <div className="mt-2 text-yellow-300 font-medium">
             — {quotes[index].author}
           </div>
         </motion.div>
@@ -59,6 +59,7 @@ function QuoteCarousel() {
 }
 
 const LoginForm = () => {
+  const { toast } = useToast();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -90,16 +91,16 @@ const LoginForm = () => {
         toast({
           variant: "destructive",
           title: "Login Failed",
-          description: "Invalid email or password",
+          description: result.error || "Invalid email or password",
         });
       } else {
         toast({
-          title: "Login Successful",
+          title: "Login Successful, please wait ",
           description: "Redirecting to your dashboard...",
         });
         router.push("/admin");
       }
-    } catch {
+    } catch (err) {
       toast({
         variant: "destructive",
         title: "Error occurred.",
@@ -111,16 +112,17 @@ const LoginForm = () => {
   };
 
   return (
-    <section className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+    <section className="h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      {/* <div className="w-full max-w-2xl md:max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-2xl overflow-hidden bg-background"> */}
       <div className="w-full h-full flex flex-col md:flex-row shadow-2xl overflow-hidden bg-background">
-        {/* Left Panel */}
+        {/* Left: Carousel & Image (hidden on small screens) */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
           className="hidden md:flex flex-col justify-between items-center bg-gradient-to-br from-yellow-700 via-yellow-900 to-gray-900 md:w-1/2 relative"
         >
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 z-0">
             <img
               src="/login-bg.jpg"
               alt="Writer background"
@@ -129,24 +131,26 @@ const LoginForm = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80" />
           </div>
-          <div className="relative z-10 flex-1 flex flex-col justify-center">
+
+          <div className="relative z-10 flex-1 flex flex-col justify-center w-full">
             <QuoteCarousel />
           </div>
+
           <div className="relative z-10 mb-8 text-center text-gray-300 text-xs">
             &copy; {new Date().getFullYear()} BlogStore. Write. Share. Inspire.
           </div>
         </motion.div>
 
-        {/* Right Panel */}
+
+
+        {/* Right: Login Form */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
           className="flex-1 flex flex-col justify-center items-center bg-[#1a1c1a] p-8 md:p-12"
         >
-          <h2 className="text-3xl font-bold text-white text-center mb-6">
-            Sign in
-          </h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-6">Sign in</h2>
           <p className="text-lg text-gray-400 text-center mb-8">
             Enter your email and password to access your account
           </p>
@@ -190,7 +194,7 @@ const LoginForm = () => {
             </Button>
           </form>
           <div className="mt-6 text-center text-sm text-gray-400">
-            Don&apos;t have an account?{" "}
+            Don't have an account?{" "}
             <Link href="/register" className="text-yellow-500 hover:underline">
               Sign up
             </Link>
@@ -201,4 +205,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LoginForm;
