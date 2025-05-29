@@ -16,7 +16,7 @@ export default function AuthRootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className} cz-shortcut-listen="true">
             <div className="flex min-h-screen flex-col">
-              <main className="flex-1">{children}</main>
+              <div className="flex-1">{children}</div>
               <Toaster />
             </div>
       </body>
