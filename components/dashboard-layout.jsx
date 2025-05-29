@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Users, FileText, ShoppingBag, Settings, LogOut, Menu, X, Home, PlusCircle, BarChart3 } from "lucide-react"
+import { Users, FileText, ShoppingBag, Settings, Menu, X, Home, PlusCircle, BarChart3 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import LogoutBtn from "./LogOut/LogOutBtn"
 import { useSession } from "next-auth/react"
@@ -13,8 +13,8 @@ export default function DashboardLayout({ children, role }) {
   const pathname = usePathname()
   const { data: session } = useSession()
   const user = session?.user || {
-    name: "AdminUser",
-    email: "admin@example.com",
+    username: "Guest",
+    email: "guest@example.com",
   }
 
   const getNavItems = () => {

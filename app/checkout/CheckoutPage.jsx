@@ -13,6 +13,7 @@ import Link from "next/link"
 import { ArrowLeft, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "sonner"
 
 const CheckoutPage = ({ username, email, role }) => {
   const items = useCartStore((state) => state.items)
@@ -26,14 +27,23 @@ const CheckoutPage = ({ username, email, role }) => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (items.length === 0) {
+    if (!items || items.length === 0) {
       router.push("/store")
     }
   }, [items, router])
 
   const handleCheckout = async () => {
     if (!shippingAddress.trim()) {
-      alert("Please enter a shipping address.")
+      toast({
+        title:  "Please enter a shipping address."
+      })
+      return
+    }
+
+    if (!items.length) {
+      toast({
+        title: "Please add items to your empty cart."
+      })
       return
     }
 
@@ -47,29 +57,32 @@ const CheckoutPage = ({ username, email, role }) => {
         shippingAddress,
       })
       clearCart()
+
       toast({
-        title: "Order placed successfully!",
-        description: "Thank you for your purchase.",
+        title: "Order placed successfully!. Thank you for your purchase.",
       })
 
-      if(role === "admin") {
+      if (role === "admin") {
         router.push("/admin/orders")
-      }
-      else if(role === "user") {
+      } else if (role === "user") {
         router.push("/dashboard/orders")
-      }
-      else if(role === "writer") {
+      } else if (role === "writer") {
         router.push("/writer/orders")
       } else {
         router.push("/store")
       }
-      
-      
     } catch (err) {
       console.error(err)
-      alert("Something went wrong.")
+      toast({ title: "Error", description: "Something went wrong. Please try again." })
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleQuantityChange = (id, value) => {
+    const qty = parseInt(value, 10)
+    if (!isNaN(qty) && qty > 0) {
+      updateQuantity(id, qty)
     }
   }
 
@@ -82,9 +95,9 @@ const CheckoutPage = ({ username, email, role }) => {
         </Link>
       </Button>
 
-      <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+      {/* <h1 className="text-3xl font-bold mb-8">Checkout</h1> */}
 
-      {items.length === 0 ? (
+      {!items.length ? (
         <div className="text-center py-12">
           <p className="text-xl mb-4">Your cart is empty</p>
           <Button asChild>
@@ -114,14 +127,15 @@ const CheckoutPage = ({ username, email, role }) => {
                           <div className="relative w-16 h-16">
                             <Image
                               src={item.image || "/placeholder.svg"}
-                              alt={item.name}
+                              alt={item.name || "Product"}
                               fill
                               className="object-cover rounded"
+                              onError={(e) => (e.target.src = "/placeholder.svg")}
                             />
                           </div>
                           <div>
                             <h3 className="font-medium">{item.name}</h3>
-                            <p className="text-sm text-slate-500 dark:text-slate-400">
+                            <p className="text-sm text-muted-foreground">
                               {item.description?.substring(0, 60)}...
                             </p>
                           </div>
@@ -132,9 +146,7 @@ const CheckoutPage = ({ username, email, role }) => {
                           type="number"
                           min="1"
                           value={item.quantity}
-                          onChange={(e) =>
-                            updateQuantity(item.id, parseInt(e.target.value, 10))
-                          }
+                          onChange={(e) => handleQuantityChange(item.id, e.target.value)}
                           className="text-center w-20"
                         />
                       </td>
