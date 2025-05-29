@@ -1,8 +1,6 @@
 import { Inter } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
-import SessionWrapper from "@/components/SessionWrapper/SessionWrapper"
 
 const inter = Inter({ subsets: ["latin"] });
 
