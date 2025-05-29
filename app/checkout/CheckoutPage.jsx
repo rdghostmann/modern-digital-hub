@@ -14,7 +14,7 @@ import { ArrowLeft, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { Textarea } from "@/components/ui/textarea"
 
-const CheckoutPage = ({ username, email }) => {
+const CheckoutPage = ({ username, email, role }) => {
   const items = useCartStore((state) => state.items)
   const getTotal = useCartStore((state) => state.getTotal)
   const clearCart = useCartStore((state) => state.clearCart)
@@ -51,7 +51,20 @@ const CheckoutPage = ({ username, email }) => {
         title: "Order placed successfully!",
         description: "Thank you for your purchase.",
       })
-      router.push("/store")
+
+      if(role === "admin") {
+        router.push("/admin/orders")
+      }
+      else if(role === "user") {
+        router.push("/dashboard/orders")
+      }
+      else if(role === "writer") {
+        router.push("/writer/orders")
+      } else {
+        router.push("/store")
+      }
+      
+      
     } catch (err) {
       console.error(err)
       alert("Something went wrong.")
