@@ -35,7 +35,7 @@ export default function Home() {
 
       {/* Featured Video Section */}
       <section className="w-full py-12 md:py-24 bg-white dark:bg-slate-950">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm dark:bg-slate-800">
@@ -64,7 +64,7 @@ export default function Home() {
 
       {/* Featured Products Section */}
       <section className="w-full py-12 md:py-24 bg-slate-50 dark:bg-slate-900">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm dark:bg-slate-800">
@@ -91,7 +91,7 @@ export default function Home() {
 
       {/* Recent Blog Posts Section */}
       <section className="w-full py-12 md:py-24 bg-white dark:bg-slate-950">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Recent Blog Posts</h2>
