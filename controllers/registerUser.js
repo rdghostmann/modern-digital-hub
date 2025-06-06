@@ -36,19 +36,23 @@ export async function registerUser({ username, email, password, phone }) {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
     const userID = uuidv4();
+    
+    // Use the provided role, fallback to "user" if not valid
+    const allowedRoles = ["user", "writer", "admin"];
+    const safeRole = allowedRoles.includes(role) ? role : "user";
 
-    // Create a new user
     const newUser = new User({
       userID,
       username,
       email,
       password: hashedPassword,
       phone,
-      role: "user", // Default role
-      status: "active", // Default status
+      role: safeRole, // <-- set role from UI
+      status: "active",
     });
 
-      await newUser.save();
+
+    await newUser.save();
 
     return {
       success: true,
