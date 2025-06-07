@@ -64,6 +64,13 @@ export const authOptions = {
       };
       return session;
     },
+    async redirect({ url, baseUrl, user, token }) {
+      // Use token.role for redirect
+      if (token?.role === "admin") return "/admin";
+      if (token?.role === "user") return "/dashboard";
+      if (token?.role === "writer") return "/writer";
+      return baseUrl;
+    }
   },
   pages: {
     signIn: "/login",

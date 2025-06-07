@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { registerUser } from '@/controllers/registerUser';
 import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,55 +14,66 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from 'sonner';
 
 const RegisterForm = () => {
-  const { toast } = useToast();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (formData) => {
+    setLoading(true);
+
+    // Debugging: Log all form data
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
+    const username = formData.get('username');
+    const email = formData.get('email');
+    const password = formData.get('password');
+    const confirmPassword = formData.get('confirmPassword');
+    const phone = formData.get('phone');
+    const role = formData.get('role');
+
+    if (password !== confirmPassword) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Passwords do not match.",
+      });
+      return;
+    }
+
+
     try {
-      setLoading(true);
 
-      // Debugging: Log all form data
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
+      const response = await fetch("api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          phone,
+          role
+        }),
+      })
+      const data = await res.json();
+      setLoading(false);
 
-      const username = formData.get('username');
-      const email = formData.get('email');
-      const password = formData.get('password');
-      const confirmPassword = formData.get('confirmPassword');
-      const phone = formData.get('phone');
-      const role = formData.get('role');
-
-      if (password !== confirmPassword) {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Passwords do not match.",
-        });
-        return;
-      }
-
-      const response = await registerUser({ username, email, password, phone, role });
-
-      if (response?.success) {
-        toast({
-          title: "Registration successful!",
-          description: "You are now redirected to login.",
-        });
-        router.push('/login');
-      } else {
-        toast({
-          variant: "destructive",
-          title: "Error",
+      if (!response.ok) {
+        toast.error({
+          title: "Registration failed",
           description: "An error occurred while registering.",
         });
       }
+
+      toast.success("Registration successful! You can now log in.");
+
+      //Reset all input fields
+
     } catch (error) {
-      toast({
-        variant: "destructive",
+      toast.error({
         title: "Error",
         description: "Failed Internet Connection. Please try again later.",
       });
@@ -73,13 +83,12 @@ const RegisterForm = () => {
   };
 
   return (
-      <section className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <section className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="bg-[#1a1c1a] w-full max-w-md p-8 rounded-2xl shadow-lg">
-          <h2 className="text-3xl font-bold text-white text-center mb-6">Sign in</h2>
+        <h2 className="text-3xl font-bold text-white text-center mb-6">Sign in</h2>
         <p className="text-lg text-gray-400 text-center mb-8">Enter your email and password to access your accoun</p>
 
         <form
-          action={handleSubmit}
           className="space-y-5"
           onSubmit={(e) => {
             e.preventDefault();
