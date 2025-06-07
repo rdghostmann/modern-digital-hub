@@ -1,115 +1,450 @@
+"use client"
+
+import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
-import { ArrowRight, ShoppingBag, Video } from "lucide-react"
+import Image from "next/image"
+import { motion } from "framer-motion"
+import { Splide, SplideSlide } from "@splidejs/react-splide"
+import "@splidejs/react-splide/css"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import FeaturedVideo from "@/components/featured-video"
-import FeaturedProducts from "@/components/featured-products"
-import RecentPosts from "@/components/recent-posts"
-import { Suspense } from "react"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Clock, ArrowRight } from "lucide-react"
+import FeaturedPostCard from "@/components/featured-post-card"
+import PostCard from "@/components/post-card"
+import CategorySection from "@/components/category-section"
+import NewsletterSection from "@/components/newsletter-section"
+import { useInView } from "framer-motion"
+import ParallaxCTA from "@/components/parallax-cta"
+import AnimatedHeading from "@/components/animated-heading"
+import VideoOfTheWeek from "@/components/video-of-the-week"
+import TrendingPosts from "@/components/trending-posts"
+import CategoryButtons from "@/components/category-buttons"
+import AdsBanner from "@/components/ads-banner"
+
+// Sample data for featured posts
+const featuredPosts = [
+  {
+    id: 1,
+    title: "The Future of AI in Everyday Technology",
+    excerpt: "How artificial intelligence is transforming our daily lives and what to expect in the coming years.",
+    category: "Technology",
+    image: "/placeholder.svg?height=600&width=800",
+    author: {
+      name: "Alex Johnson",
+      avatar: "/placeholder.svg?height=50&width=50",
+    },
+    date: "May 28, 2023",
+    readTime: "5 min read",
+  },
+  {
+    id: 2,
+    title: "Summer Fashion Trends to Watch in 2023",
+    excerpt: "The hottest styles, colors, and accessories that will dominate the fashion scene this summer.",
+    category: "Fashion",
+    image: "/placeholder.svg?height=600&width=800",
+    author: {
+      name: "Emma Davis",
+      avatar: "/placeholder.svg?height=50&width=50",
+    },
+    date: "May 25, 2023",
+    readTime: "4 min read",
+  },
+  {
+    id: 3,
+    title: "Hidden Gems: Unexplored Travel Destinations",
+    excerpt: "Discover these lesser-known but breathtaking locations for your next adventure.",
+    category: "Travel",
+    image: "/placeholder.svg?height=600&width=800",
+    author: {
+      name: "Michael Wong",
+      avatar: "/placeholder.svg?height=50&width=50",
+    },
+    date: "May 22, 2023",
+    readTime: "6 min read",
+  },
+]
+
+// Sample data for regular posts
+const posts = [
+  {
+    id: 4,
+    title: "How to Build a Smart Home on a Budget",
+    excerpt: "Transform your living space with these affordable smart home solutions.",
+    category: "Technology",
+    image: "/placeholder.svg?height=400&width=600",
+    author: {
+      name: "David Chen",
+      avatar: "/placeholder.svg?height=50&width=50",
+    },
+    date: "May 20, 2023",
+    readTime: "7 min read",
+    comments: 12,
+    views: 1543,
+  },
+  {
+    id: 5,
+    title: "Sustainable Fashion: Eco-Friendly Brands to Support",
+    excerpt: "These fashion brands are leading the way in environmental responsibility.",
+    category: "Fashion",
+    image: "/placeholder.svg?height=400&width=600",
+    author: {
+      name: "Sophia Martinez",
+      avatar: "/placeholder.svg?height=50&width=50",
+    },
+    date: "May 18, 2023",
+    readTime: "5 min read",
+    comments: 8,
+    views: 982,
+  },
+  {
+    id: 6,
+    title: "Digital Nomad Essentials: Work From Anywhere",
+    excerpt: "The tools and tips you need to successfully work while traveling the world.",
+    category: "Travel",
+    image: "/placeholder.svg?height=400&width=600",
+    author: {
+      name: "James Wilson",
+      avatar: "/placeholder.svg?height=50&width=50",
+    },
+    date: "May 15, 2023",
+    readTime: "8 min read",
+    comments: 15,
+    views: 2134,
+  },
+  {
+    id: 7,
+    title: "The Rise of Foldable Smartphones",
+    excerpt: "Are foldable phones the future? We examine the pros and cons of this emerging technology.",
+    category: "Technology",
+    image: "/placeholder.svg?height=400&width=600",
+    author: {
+      name: "Lisa Park",
+      avatar: "/placeholder.svg?height=50&width=50",
+    },
+    date: "May 12, 2023",
+    readTime: "6 min read",
+    comments: 23,
+    views: 3201,
+  },
+  {
+    id: 8,
+    title: "Minimalist Wardrobe: Less is More",
+    excerpt: "How to build a versatile wardrobe with fewer, high-quality pieces.",
+    category: "Fashion",
+    image: "/placeholder.svg?height=400&width=600",
+    author: {
+      name: "Robert Brown",
+      avatar: "/placeholder.svg?height=50&width=50",
+    },
+    date: "May 10, 2023",
+    readTime: "4 min read",
+    comments: 7,
+    views: 1245,
+  },
+  {
+    id: 9,
+    title: "Budget Travel Tips for Europe",
+    excerpt: "See the best of Europe without breaking the bank with these insider tips.",
+    category: "Travel",
+    image: "/placeholder.svg?height=400&width=600",
+    author: {
+      name: "Anna Schmidt",
+      avatar: "/placeholder.svg?height=50&width=50",
+    },
+    date: "May 8, 2023",
+    readTime: "9 min read",
+    comments: 19,
+    views: 2876,
+  },
+]
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+}
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+}
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState("all")
+
+  useEffect(() => {
+    const handleScroll = () => {
+      document.documentElement.style.setProperty("--scroll", `${window.scrollY}px`)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const featuredRef = useRef(null)
+  const latestRef = useRef(null)
+  const categoriesRef = useRef(null)
+  const newsletterRef = useRef(null)
+
+  const featuredInView = useInView(featuredRef, { once: true, amount: 0.3 })
+  const latestInView = useInView(latestRef, { once: true, amount: 0.3 })
+  const categoriesInView = useInView(categoriesRef, { once: true, amount: 0.3 })
+  const newsletterInView = useInView(newsletterRef, { once: true, amount: 0.3 })
+
+  // Filter posts based on active tab
+  const filteredPosts = activeTab === "all" ? posts : posts.filter((post) => post.category.toLowerCase() === activeTab)
+
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                Your Modern Digital Hub
-              </h1>
-              <p className="mx-auto max-w-[700px] text-slate-500 md:text-xl dark:text-slate-400">
-                Discover our blog, shop our products, and watch our <br className="hidden md:block" /> featured videos all in one place.
-              </p>
-            </div>
-            <div className="space-x-4">
-              <Button asChild>
-                <Link href="/blog">Read Blog</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="/store">Shop Now</Link>
-              </Button>
-            </div>
-          </div>
+    <div className="pt-16">
+      {/* Top Banner Ad */}
+      <div className="bg-gray-50 dark:bg-gray-900 py-4">
+        <div className="container mx-auto px-4">
+          <AdsBanner type="banner" size="medium" />
         </div>
-      </section>
+      </div>
 
-      {/* Featured Video Section */}
-      <section className="w-full py-12 md:py-24 bg-white dark:bg-slate-950">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm dark:bg-slate-800">
-                <div className="flex items-center">
-                  <Video className="mr-1 h-4 w-4" />
-                  <span>Featured Video</span>
+      {/* Hero Section with Featured Posts Carousel */}
+      <section className="relative bg-gradient-to-r from-primary-700 to-secondary-700 text-white py-16 md:py-24 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-hero-pattern bg-cover bg-center opacity-20"
+          style={{
+            transform: "translateY(calc(var(--scroll) * 0.1))",
+          }}
+        />
+        <div className="container mx-auto px-4">
+          <div className="mb-12">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-3xl md:text-5xl font-bold mb-4 relative z-10 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent"
+            >
+              Modern Blog & Store
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-lg md:text-xl text-gray-300 max-w-2xl"
+            >
+              Discover the latest trends in technology, fashion, and travel with our curated content and premium
+              products.
+            </motion.p>
+          </div>
+
+          <Splide
+            options={{
+              type: "fade",
+              rewind: true,
+              gap: "1rem",
+              arrows: true,
+              pagination: true,
+              autoplay: true,
+              interval: 5000,
+              speed: 1000,
+            }}
+            className="splide-custom"
+          >
+            {featuredPosts.map((post) => (
+              <SplideSlide key={post.id}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                  <div className="order-2 md:order-1">
+                    <Badge className="mb-4">{post.category}</Badge>
+                    <h2 className="text-2xl md:text-4xl font-bold mb-4">{post.title}</h2>
+                    <p className="text-gray-300 mb-6">{post.excerpt}</p>
+                    <div className="flex items-center mb-6">
+                      <Image
+                        src={post.author.avatar || "/placeholder.svg"}
+                        alt={post.author.name}
+                        width={40}
+                        height={40}
+                        className="rounded-full mr-3"
+                      />
+                      <div>
+                        <p className="font-medium">{post.author.name}</p>
+                        <div className="flex items-center text-sm text-gray-400">
+                          <span>{post.date}</span>
+                          <span className="mx-2">•</span>
+                          <Clock className="h-3 w-3 mr-1" />
+                          <span>{post.readTime}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <Button asChild>
+                      <Link href={`/post/${post.id}`}>
+                        Read Article <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                  <div className="order-1 md:order-2">
+                    <div className="relative h-64 md:h-96 overflow-hidden rounded-lg">
+                      <Image
+                        src={post.image || "/placeholder.svg"}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    </div>
+                  </div>
                 </div>
+              </SplideSlide>
+            ))}
+          </Splide>
+        </div>
+      </section>
+
+      {/* Featured Posts Section */}
+      <section
+        ref={featuredRef}
+        className="py-16 bg-gradient-to-b from-white to-blue-50 dark:from-gray-900 dark:to-gray-800"
+      >
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial="hidden"
+            animate={featuredInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            className="mb-10"
+          >
+            <AnimatedHeading title="Featured Posts" subtitle="Discover our most popular articles" gradient={true} />
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            animate={featuredInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {featuredPosts.map((post) => (
+              <FeaturedPostCard key={post.id} post={post} />
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Inline Ad */}
+      <div className="py-8 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <AdsBanner type="inline" size="medium" />
+        </div>
+      </div>
+
+      {/* Latest Posts Section with Sidebar */}
+      <section ref={latestRef} className="py-16">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial="hidden"
+            animate={latestInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            className="mb-10"
+          >
+            <AnimatedHeading title="Latest Articles" subtitle="Stay updated with our newest content" gradient={true} />
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-3">
+              <Tabs defaultValue="all" className="mb-10">
+                <TabsList>
+                  <TabsTrigger value="all" onClick={() => setActiveTab("all")}>
+                    All
+                  </TabsTrigger>
+                  <TabsTrigger value="technology" onClick={() => setActiveTab("technology")}>
+                    Technology
+                  </TabsTrigger>
+                  <TabsTrigger value="fashion" onClick={() => setActiveTab("fashion")}>
+                    Fashion
+                  </TabsTrigger>
+                  <TabsTrigger value="travel" onClick={() => setActiveTab("travel")}>
+                    Travel
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+
+              <motion.div
+                initial="hidden"
+                animate={latestInView ? "visible" : "hidden"}
+                variants={staggerContainer}
+                className="grid grid-cols-1 md:grid-cols-2 gap-8"
+              >
+                {filteredPosts.map((post) => (
+                  <PostCard key={post.id} post={post} />
+                ))}
+              </motion.div>
+
+              <div className="flex justify-center mt-12">
+                <Button variant="outline" size="lg">
+                  Load More Articles
+                </Button>
               </div>
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Video of the Week</h2>
-              <p className="mx-auto max-w-[700px] text-slate-500 md:text-xl dark:text-slate-400">
-                Check out our latest featured video content.
-              </p>
             </div>
-            <Suspense fallback={<div className="h-48 w-full bg-slate-200 dark:bg-slate-800 animate-pulse" />}>
-              <FeaturedVideo />
-            </Suspense>
-            <Button asChild variant="link">
-              <Link href="/videos" className="flex items-center">
-                View all videos
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+
+            {/* Sidebar */}
+            <div className="lg:col-span-1 space-y-8">
+              <TrendingPosts />
+              <CategoryButtons activeCategory={activeTab} />
+              <AdsBanner type="sidebar" size="large" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="w-full py-12 md:py-24 bg-slate-50 dark:bg-slate-900">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-slate-100 px-3 py-1 text-sm dark:bg-slate-800">
-                <div className="flex items-center">
-                  <ShoppingBag className="mr-1 h-4 w-4" />
-                  <span>Shop</span>
-                </div>
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Featured Products</h2>
-              <p className="mx-auto max-w-[700px] text-slate-500 md:text-xl dark:text-slate-400">
-                Explore our curated selection of products.
-              </p>
-            </div>
-            <FeaturedProducts />
-            <Button asChild variant="link">
-              <Link href="/store" className="flex items-center">
-                View all products
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+      {/* Video of the Week Section */}
+      <VideoOfTheWeek />
+
+      {/* Parallax CTA Section */}
+      <ParallaxCTA
+        title="Discover Our Premium Content"
+        description="Unlock exclusive articles, guides, and resources to enhance your knowledge and skills."
+        buttonText="Become a Member"
+        buttonLink="/membership"
+        backgroundImage="/placeholder.svg?height=800&width=1600&text=Join+Today"
+      />
+
+      {/* Categories Section */}
+      <section
+        ref={categoriesRef}
+        className="py-16 bg-gradient-to-b from-blue-50 to-white dark:from-gray-800 dark:to-gray-900"
+      >
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial="hidden"
+            animate={categoriesInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            className="mb-10"
+          >
+            <AnimatedHeading
+              title="Explore Categories"
+              subtitle="Find content that matches your interests"
+              gradient={true}
+            />
+          </motion.div>
+
+          <CategorySection />
         </div>
       </section>
 
-      {/* Recent Blog Posts Section */}
-      <section className="w-full py-12 md:py-24 bg-white dark:bg-slate-950">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Recent Blog Posts</h2>
-              <p className="mx-auto max-w-[700px] text-slate-500 md:text-xl dark:text-slate-400">
-                Stay updated with our latest articles and insights.
-              </p>
-            </div>
-            <Suspense fallback={<div className="h-48 w-full bg-slate-200 dark:bg-slate-800 animate-pulse" />}>
-              <RecentPosts />
-            </Suspense>
-
-            <Button asChild variant="link">
-              <Link href="/blog" className="flex items-center">
-                View all posts
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+      {/* Newsletter Section */}
+      <section
+        ref={newsletterRef}
+        className="py-16 relative overflow-hidden"
+        style={{
+          backgroundImage: "url('/placeholder.svg?height=600&width=1200&text=Newsletter')",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="absolute inset-0 bg-primary-600/80 backdrop-blur-sm"></div>
+        <div className="container mx-auto px-4">
+          <motion.div initial="hidden" animate={newsletterInView ? "visible" : "hidden"} variants={fadeInUp}>
+            <NewsletterSection />
+          </motion.div>
         </div>
       </section>
     </div>
