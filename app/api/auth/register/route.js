@@ -31,7 +31,6 @@ export async function POST(req) {
       password: hashedPassword,
       phone,
       role: "user", // Default role
-      status: "active", // Default status
     });
 
     return NextResponse.json({
