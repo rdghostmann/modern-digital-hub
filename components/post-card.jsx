@@ -8,29 +8,29 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Clock, MessageSquare, Eye, Bookmark } from "lucide-react"
 
-interface Author {
-  name: string
-  avatar: string
-}
+// interface Author {
+//   name: string
+//   avatar: string
+// }
 
-interface Post {
-  id: number
-  title: string
-  excerpt: string
-  category: string
-  image: string
-  author: Author
-  date: string
-  readTime: string
-  comments?: number
-  views?: number
-}
+// interface Post {
+//   id: number
+//   title: string
+//   excerpt: string
+//   category: string
+//   image: string
+//   author: Author
+//   date: string
+//   readTime: string
+//   comments?: number
+//   views?: number
+// }
 
-interface PostCardProps {
-  post: Post
-}
+// interface PostCardProps {
+//   post: Post
+// }
 
-export default function PostCard({ post }: PostCardProps) {
+export default function PostCard({ post }) {
   return (
     <motion.div
       variants={{
@@ -41,7 +41,7 @@ export default function PostCard({ post }: PostCardProps) {
       <Card className="overflow-hidden h-full">
         <div className="relative h-48 w-full overflow-hidden">
           <Image
-            src={post.image || "/placeholder.svg"}
+            src={post.image || "/post-landscape-6.jpg"}
             alt={post.title}
             fill
             className="object-cover transition-transform duration-500 hover:scale-105"
@@ -67,7 +67,7 @@ export default function PostCard({ post }: PostCardProps) {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <Image
-                src={post.author.avatar || "/placeholder.svg"}
+                src={post.author.avatar || "/blog-author.jpg"}
                 alt={post.author.name}
                 width={24}
                 height={24}

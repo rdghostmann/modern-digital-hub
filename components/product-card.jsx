@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 
 import { useState } from "react"
 import Image from "next/image"
@@ -10,51 +10,51 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ShoppingCart, Heart, Star } from "lucide-react"
-import { useCart } from "@/contexts/cart-context"
+// import { useCart } from "@/contexts/cart-context"
 
-interface Product {
-  id: number
-  name: string
-  price: number
-  discountPrice: number | null
-  image: string
-  rating: number
-  reviewCount: number
-  category: string
-  isNew?: boolean
-  isFeatured?: boolean
-}
+// interface Product {
+//   id: number
+//   name: string
+//   price: number
+//   discountPrice: number | null
+//   image: string
+//   rating: number
+//   reviewCount: number
+//   category: string
+//   isNew?: boolean
+//   isFeatured?: boolean
+// }
 
-interface ProductCardProps {
-  product: Product
-}
+// interface ProductCardProps {
+//   product: Product
+// }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }) {
   const [isHovered, setIsHovered] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
 
-  const { dispatch } = useCart()
+  // const { dispatch } = useCart()
 
-  const handleFavoriteClick = (e: React.MouseEvent) => {
+  const handleFavoriteClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
     setIsFavorite(!isFavorite)
   }
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    dispatch({
-      type: "ADD_ITEM",
-      payload: {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        discountPrice: product.discountPrice,
-        image: product.image,
-        category: product.category,
-      },
-    })
+    // dispatch({
+    //   type: "ADD_ITEM",
+    //   payload: {
+    //     id: product.id,
+    //     name: product.name,
+    //     price: product.price,
+    //     discountPrice: product.discountPrice,
+    //     image: product.image,
+    //     category: product.category,
+    //   },
+    // })
   }
 
   return (

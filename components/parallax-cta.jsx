@@ -5,13 +5,13 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-interface ParallaxCTAProps {
-  title: string
-  description: string
-  buttonText: string
-  buttonLink: string
-  backgroundImage?: string
-}
+// interface ParallaxCTAProps {
+//   title: string
+//   description: string
+//   buttonText: string
+//   buttonLink: string
+//   backgroundImage?: string
+// }
 
 export default function ParallaxCTA({
   title,
@@ -19,8 +19,8 @@ export default function ParallaxCTA({
   buttonText,
   buttonLink,
   backgroundImage = "/placeholder.svg?height=800&width=1600&text=CTA",
-}: ParallaxCTAProps) {
-  const ref = useRef<HTMLDivElement>(null)
+}) {
+  const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -50,7 +50,7 @@ export default function ParallaxCTA({
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">{title}</h2>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8">{description}</p>
-          <Button size="lg" asChild className="bg-accent hover:bg-accent-600 text-white">
+          <Button size="lg" asChild className="bg-accent hover:bg-accent-600 text-gray-500">
             <Link href={buttonLink}>{buttonText}</Link>
           </Button>
         </motion.div>

@@ -22,6 +22,9 @@ import TrendingPosts from "@/components/trending-posts"
 import CategoryButtons from "@/components/category-buttons"
 import AdsBanner from "@/components/ads-banner"
 
+
+// const featuredPosts = await getFeaturedBlogPosts()
+
 // Sample data for featured posts
 const featuredPosts = [
   {
@@ -29,10 +32,10 @@ const featuredPosts = [
     title: "The Future of AI in Everyday Technology",
     excerpt: "How artificial intelligence is transforming our daily lives and what to expect in the coming years.",
     category: "Technology",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/post-slide-1.jpg",
     author: {
       name: "Alex Johnson",
-      avatar: "/placeholder.svg?height=50&width=50",
+      avatar: "/team/team-1.jpg",
     },
     date: "May 28, 2023",
     readTime: "5 min read",
@@ -42,10 +45,10 @@ const featuredPosts = [
     title: "Summer Fashion Trends to Watch in 2023",
     excerpt: "The hottest styles, colors, and accessories that will dominate the fashion scene this summer.",
     category: "Fashion",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/post-slide-2.jpg",
     author: {
       name: "Emma Davis",
-      avatar: "/placeholder.svg?height=50&width=50",
+      avatar: "/team/team-2.jpg",
     },
     date: "May 25, 2023",
     readTime: "4 min read",
@@ -55,10 +58,10 @@ const featuredPosts = [
     title: "Hidden Gems: Unexplored Travel Destinations",
     excerpt: "Discover these lesser-known but breathtaking locations for your next adventure.",
     category: "Travel",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/post-slide-3.jpg",
     author: {
       name: "Michael Wong",
-      avatar: "/placeholder.svg?height=50&width=50",
+      avatar: "/team/team-3.jpg",
     },
     date: "May 22, 2023",
     readTime: "6 min read",
@@ -72,10 +75,10 @@ const posts = [
     title: "How to Build a Smart Home on a Budget",
     excerpt: "Transform your living space with these affordable smart home solutions.",
     category: "Technology",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/blog/blog-recent-1.jpg",
     author: {
       name: "David Chen",
-      avatar: "/placeholder.svg?height=50&width=50",
+      avatar: "/blog/comments-2.jpg",
     },
     date: "May 20, 2023",
     readTime: "7 min read",
@@ -87,10 +90,10 @@ const posts = [
     title: "Sustainable Fashion: Eco-Friendly Brands to Support",
     excerpt: "These fashion brands are leading the way in environmental responsibility.",
     category: "Fashion",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/blog/blog-recent-3.jpg",
     author: {
       name: "Sophia Martinez",
-      avatar: "/placeholder.svg?height=50&width=50",
+      avatar: "/blog/comments-1.jpg",
     },
     date: "May 18, 2023",
     readTime: "5 min read",
@@ -102,10 +105,10 @@ const posts = [
     title: "Digital Nomad Essentials: Work From Anywhere",
     excerpt: "The tools and tips you need to successfully work while traveling the world.",
     category: "Travel",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/blog/blog-recent-2.jpg",
     author: {
       name: "James Wilson",
-      avatar: "/placeholder.svg?height=50&width=50",
+      avatar: "/blog/comments-5.jpg",
     },
     date: "May 15, 2023",
     readTime: "8 min read",
@@ -117,10 +120,10 @@ const posts = [
     title: "The Rise of Foldable Smartphones",
     excerpt: "Are foldable phones the future? We examine the pros and cons of this emerging technology.",
     category: "Technology",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/blog/blog-recent-4.jpg",
     author: {
       name: "Lisa Park",
-      avatar: "/placeholder.svg?height=50&width=50",
+      avatar: "/blog/comments-3.jpg",
     },
     date: "May 12, 2023",
     readTime: "6 min read",
@@ -132,10 +135,10 @@ const posts = [
     title: "Minimalist Wardrobe: Less is More",
     excerpt: "How to build a versatile wardrobe with fewer, high-quality pieces.",
     category: "Fashion",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/blog/blog-recent-5.jpg",
     author: {
       name: "Robert Brown",
-      avatar: "/placeholder.svg?height=50&width=50",
+      avatar: "/blog/comments-6.jpg",
     },
     date: "May 10, 2023",
     readTime: "4 min read",
@@ -147,10 +150,10 @@ const posts = [
     title: "Budget Travel Tips for Europe",
     excerpt: "See the best of Europe without breaking the bank with these insider tips.",
     category: "Travel",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/blog/blog-recent-5.jpg",
     author: {
       name: "Anna Schmidt",
-      avatar: "/placeholder.svg?height=50&width=50",
+      avatar: "/blog/comments-4.jpg",
     },
     date: "May 8, 2023",
     readTime: "9 min read",
@@ -212,7 +215,7 @@ export default function Home() {
       {/* Hero Section with Featured Posts Carousel */}
       <section className="relative bg-gradient-to-r from-primary-700 to-secondary-700 text-white py-16 md:py-24 overflow-hidden">
         <div
-          className="absolute inset-0 bg-hero-pattern bg-cover bg-center opacity-20"
+          className="absolute inset-0 bg-black bg-hero-pattern bg-cover bg-center opacity-20"
           style={{
             transform: "translateY(calc(var(--scroll) * 0.1))",
           }}
@@ -255,7 +258,7 @@ export default function Home() {
               <SplideSlide key={post.id}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                   <div className="order-2 md:order-1">
-                    <Badge className="mb-4">{post.category}</Badge>
+                    {/* <Badge className="mb-4">{post.category}</Badge> */}
                     <h2 className="text-2xl md:text-4xl font-bold mb-4">{post.title}</h2>
                     <p className="text-gray-300 mb-6">{post.excerpt}</p>
                     <div className="flex items-center mb-6">
@@ -387,8 +390,8 @@ export default function Home() {
             {/* Sidebar */}
             <div className="lg:col-span-1 space-y-8">
               <TrendingPosts />
-              <CategoryButtons activeCategory={activeTab} />
-              <AdsBanner type="sidebar" size="large" />
+              {/* <CategoryButtons activeCategory={activeTab} /> */}
+              {/* <AdsBanner type="sidebar" size="large" /> */}
             </div>
           </div>
         </div>
@@ -403,7 +406,7 @@ export default function Home() {
         description="Unlock exclusive articles, guides, and resources to enhance your knowledge and skills."
         buttonText="Become a Member"
         buttonLink="/membership"
-        backgroundImage="/placeholder.svg?height=800&width=1600&text=Join+Today"
+        backgroundImage="/post-slide-1.jpg"
       />
 
       {/* Categories Section */}
@@ -434,7 +437,8 @@ export default function Home() {
         ref={newsletterRef}
         className="py-16 relative overflow-hidden"
         style={{
-          backgroundImage: "url('/placeholder.svg?height=600&width=1200&text=Newsletter')",
+          // backgroundImage: "url('/news_letter.png')",
+          backgroundImage: "url('/blog/blog-2.jpg')",
           backgroundAttachment: "fixed",
           backgroundPosition: "center",
           backgroundSize: "cover",

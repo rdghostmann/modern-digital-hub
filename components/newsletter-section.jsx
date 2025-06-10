@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
@@ -15,7 +15,7 @@ export default function NewsletterSection() {
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     setIsSubmitting(true)
     setError("")
@@ -39,7 +39,7 @@ export default function NewsletterSection() {
             <div className="mx-auto bg-primary-100 dark:bg-primary-900/30 w-16 h-16 rounded-full flex items-center justify-center mb-6">
               <Mail className="h-8 w-8 text-primary-600" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-gray-600">
               Subscribe to Our Newsletter
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto">

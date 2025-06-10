@@ -3,13 +3,13 @@
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
-interface AnimatedHeadingProps {
-  title: string
-  subtitle?: string
-  className?: string
-  gradient?: boolean
-  centered?: boolean
-}
+// interface AnimatedHeadingProps {
+//   title: string
+//   subtitle?: string
+//   className?: string
+//   gradient?: boolean
+//   centered?: boolean
+// }
 
 export default function AnimatedHeading({
   title,
@@ -17,7 +17,7 @@ export default function AnimatedHeading({
   className,
   gradient = false,
   centered = false,
-}: AnimatedHeadingProps) {
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

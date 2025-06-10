@@ -8,17 +8,17 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { X, ExternalLink } from "lucide-react"
 
-interface AdsBannerProps {
-  type?: "banner" | "sidebar" | "inline" | "popup"
-  size?: "small" | "medium" | "large"
-  position?: "top" | "middle" | "bottom"
-}
+// interface AdsBannerProps {
+//   type?: "banner" | "sidebar" | "inline" | "popup"
+//   size?: "small" | "medium" | "large"
+//   position?: "top" | "middle" | "bottom"
+// }
 
 const adsData = {
   banner: {
     title: "Premium Wireless Headphones - 50% Off",
     description: "Experience crystal-clear audio with our latest noise-canceling technology",
-    image: "/placeholder.svg?height=200&width=600&text=Premium+Headphones",
+    image: "/placeholder-headphones.png",
     cta: "Shop Now",
     sponsor: "TechSound",
     link: "/store/product/1",
@@ -26,7 +26,7 @@ const adsData = {
   sidebar: {
     title: "Sustainable Fashion Collection",
     description: "Eco-friendly clothing that doesn't compromise on style",
-    image: "/placeholder.svg?height=300&width=250&text=Eco+Fashion",
+    image: "/black-apparel.jpg",
     cta: "Explore",
     sponsor: "EcoStyle",
     link: "/store/category/fashion",
@@ -34,7 +34,7 @@ const adsData = {
   inline: {
     title: "Travel Insurance - Get Protected",
     description: "Comprehensive coverage for your next adventure",
-    image: "/placeholder.svg?height=150&width=400&text=Travel+Insurance",
+    image: "/blog/blog-recent-4.jpg",
     cta: "Get Quote",
     sponsor: "SafeTravel",
     link: "#",
@@ -42,14 +42,14 @@ const adsData = {
   popup: {
     title: "Limited Time Offer!",
     description: "Subscribe to our newsletter and get 20% off your first purchase",
-    image: "/placeholder.svg?height=200&width=300&text=Newsletter+Offer",
+    image: "/blog/blog-inside-post.jpg",
     cta: "Subscribe",
     sponsor: "ModernBlog",
     link: "#newsletter",
   },
 }
 
-export default function AdsBanner({ type = "banner", size = "medium", position = "top" }: AdsBannerProps) {
+export default function AdsBanner({ type = "banner", size = "medium", position = "top" }) {
   const [isVisible, setIsVisible] = useState(true)
   const [isHovered, setIsHovered] = useState(false)
 

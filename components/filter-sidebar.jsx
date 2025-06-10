@@ -7,18 +7,18 @@ import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Slider } from "@/components/ui/slider"
 
-interface FilterSidebarProps {
-  activeCategory: string
-  setActiveCategory: (category: string) => void
-  onClose?: () => void
-}
+// interface FilterSidebarProps {
+//   activeCategory: string
+//   setActiveCategory: (category: string) => void
+//   onClose?: () => void
+// }
 
 const categories = ["Electronics", "Clothing", "Accessories", "Home", "Health"]
 
-export default function FilterSidebar({ activeCategory, setActiveCategory, onClose }: FilterSidebarProps) {
+export default function FilterSidebar({ activeCategory, setActiveCategory, onClose }) {
   const [priceRange, setPriceRange] = useState([0, 200])
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = (category) => {
     setActiveCategory(category.toLowerCase())
     onClose?.()
   }

@@ -17,17 +17,17 @@ const categories = [
   { name: "Health", slug: "health", count: 23, color: "bg-teal-500" },
 ]
 
-interface CategoryButtonsProps {
-  activeCategory?: string
-  showCounts?: boolean
-  layout?: "grid" | "list"
-}
+// interface CategoryButtonsProps {
+//   activeCategory?: string
+//   showCounts?: boolean
+//   layout?: "grid" | "list"
+// }
 
 export default function CategoryButtons({
   activeCategory = "all",
   showCounts = true,
   layout = "list",
-}: CategoryButtonsProps) {
+}) {
   return (
     <Card className="sticky top-24">
       <CardContent className="p-6">

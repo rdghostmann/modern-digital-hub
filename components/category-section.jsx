@@ -9,42 +9,42 @@ const categories = [
   {
     name: "Technology",
     description: "Latest gadgets and tech news",
-    image: "/placeholder.svg?height=300&width=300&text=Tech",
+    image: "/post-landscape-1.jpg",
     count: 42,
     slug: "technology",
   },
   {
     name: "Fashion",
     description: "Style guides and trends",
-    image: "/placeholder.svg?height=300&width=300&text=Fashion",
+    image: "/post-landscape-2.jpg",
     count: 38,
     slug: "fashion",
   },
   {
     name: "Travel",
     description: "Destinations and travel tips",
-    image: "/placeholder.svg?height=300&width=300&text=Travel",
+    image: "/post-landscape-8.jpg",
     count: 27,
     slug: "travel",
   },
   {
     name: "Lifestyle",
     description: "Living well and personal growth",
-    image: "/placeholder.svg?height=300&width=300&text=Lifestyle",
+    image: "/post-landscape-4.jpg",
     count: 31,
     slug: "lifestyle",
   },
   {
     name: "Food",
     description: "Recipes and culinary adventures",
-    image: "/placeholder.svg?height=300&width=300&text=Food",
+    image: "/post-landscape-5.jpg",
     count: 19,
     slug: "food",
   },
   {
     name: "Health",
     description: "Wellness and fitness advice",
-    image: "/placeholder.svg?height=300&width=300&text=Health",
+    image: "/post-landscape-6.jpg",
     count: 23,
     slug: "health",
   },
@@ -63,7 +63,7 @@ export default function CategorySection() {
           <Link href={`/category/${category.slug}`}>
             <Card className="overflow-hidden h-full hover:shadow-lg transition-all duration-300 hover:border-primary-500 hover:-translate-y-1">
               <div className="relative h-40 w-full">
-                <Image src={category.image || "/placeholder.svg"} alt={category.name} fill className="object-cover" />
+                <Image src={category.image || "/post-landscape-1.jpg"} alt={category.name} fill className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent flex items-end">
                   <div className="p-4 text-white">
                     <h3 className="text-xl font-bold">{category.name}</h3>

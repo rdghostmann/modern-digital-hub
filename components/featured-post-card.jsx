@@ -7,27 +7,27 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Clock } from "lucide-react"
 
-interface Author {
-  name: string
-  avatar: string
-}
+// interface Author {
+//   name: string
+//   avatar: string
+// }
 
-interface Post {
-  id: number
-  title: string
-  excerpt: string
-  category: string
-  image: string
-  author: Author
-  date: string
-  readTime: string
-}
+// interface Post {
+//   id: number
+//   title: string
+//   excerpt: string
+//   category: string
+//   image: string
+//   author: Author
+//   date: string
+//   readTime: string
+// }
 
-interface FeaturedPostCardProps {
-  post: Post
-}
+// interface FeaturedPostCardProps {
+//   post: Post
+// }
 
-export default function FeaturedPostCard({ post }: FeaturedPostCardProps) {
+export default function FeaturedPostCard({ post }) {
   return (
     <motion.div
       variants={{
