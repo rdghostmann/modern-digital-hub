@@ -227,7 +227,7 @@ export default function StorePage() {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-primary-800 to-secondary-800 text-white py-16 md:py-24 overflow-hidden">
         <div
-          className="absolute inset-0 bg-hero-pattern bg-cover bg-center opacity-20"
+          className="absolute inset-0 bg-black bg-hero-pattern bg-cover bg-center opacity-20"
           style={{
             transform: "translateY(calc(var(--scroll) * 0.1))",
           }}
