@@ -17,11 +17,7 @@ const categories = [
   { name: "Health", slug: "health", count: 23, color: "bg-teal-500" },
 ]
 
-// interface CategoryButtonsProps {
-//   activeCategory?: string
-//   showCounts?: boolean
-//   layout?: "grid" | "list"
-// }
+
 
 export default function CategoryButtons({
   activeCategory = "all",
@@ -29,7 +25,7 @@ export default function CategoryButtons({
   layout = "list",
 }) {
   return (
-    <Card className="sticky top-24">
+    <Card className="">
       <CardContent className="p-6">
         <div className="flex items-center mb-6">
           <Hash className="h-5 w-5 text-primary-600 mr-2" />

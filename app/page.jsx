@@ -204,7 +204,8 @@ export default function Home() {
   const filteredPosts = activeTab === "all" ? posts : posts.filter((post) => post.category.toLowerCase() === activeTab)
 
   return (
-    <div className="pt-16">
+    // <div className="pt-16">
+    <div className="pt-3">
       {/* Top Banner Ad */}
       <div className="bg-gray-50 dark:bg-gray-900 py-4">
         <div className="container mx-auto px-4">
@@ -214,12 +215,8 @@ export default function Home() {
 
       {/* Hero Section with Featured Posts Carousel */}
       <section className="relative bg-gradient-to-r from-primary-700 to-secondary-700 text-white py-16 md:py-24 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-black bg-hero-pattern bg-cover bg-center opacity-20"
-          style={{
-            transform: "translateY(calc(var(--scroll) * 0.1))",
-          }}
-        />
+        <div className="absolute inset-0 bg-black bg-hero-pattern bg-cover bg-center opacity-20"
+          style={{ transform: "translateY(calc(var(--scroll) * 0.1))", }} />
         <div className="container mx-auto px-4">
           <div className="mb-12">
             <motion.h1
@@ -252,11 +249,11 @@ export default function Home() {
               interval: 5000,
               speed: 1000,
             }}
-            className="splide-custom"
+            className="splide-custom "
           >
             {featuredPosts.map((post) => (
               <SplideSlide key={post.id}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="pb-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                   <div className="order-2 md:order-1">
                     {/* <Badge className="mb-4">{post.category}</Badge> */}
                     <h2 className="text-2xl md:text-4xl font-bold mb-4">{post.title}</h2>
@@ -391,7 +388,7 @@ export default function Home() {
             <div className="lg:col-span-1 space-y-8">
               <TrendingPosts />
               {/* <CategoryButtons activeCategory={activeTab} /> */}
-              {/* <AdsBanner type="sidebar" size="large" /> */}
+              <AdsBanner type="sidebar" size="large" />
             </div>
           </div>
         </div>
