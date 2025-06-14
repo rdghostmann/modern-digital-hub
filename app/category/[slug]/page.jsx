@@ -110,13 +110,13 @@ const staggerContainer = {
 
 export default function CategoryPage() {
   const params = useParams()
-  const slug = params.slug as string
+  const slug = params.slug 
   const [sortBy, setSortBy] = useState("latest")
 
   const postsRef = useRef(null)
   const postsInView = useInView(postsRef, { once: true, amount: 0.3 })
 
-  const category = categoryInfo[slug as keyof typeof categoryInfo]
+  const category = categoryInfo[slug ?.toLowerCase()] 
   const categoryPosts = allPosts.filter((post) => post.category.toLowerCase() === slug)
 
   if (!category) {
@@ -149,8 +149,8 @@ export default function CategoryPage() {
             className="max-w-3xl"
           >
             <Badge className={`mb-4 ${category.color} text-white`}>{categoryPosts.length} Articles</Badge>
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">{category.title}</h1>
-            <p className="text-lg text-gray-200 mb-8">{category.description}</p>
+            <h1 className="text-3xl text-gray-700 md:text-5xl font-bold mb-4">{category.title}</h1>
+            <p className="text-lg text-gray-400 mb-8">{category.description}</p>
           </motion.div>
         </div>
       </section>

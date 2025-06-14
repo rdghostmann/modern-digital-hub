@@ -18,7 +18,7 @@ export default function ParallaxCTA({
   description,
   buttonText,
   buttonLink,
-  backgroundImage = "/placeholder.svg?height=800&width=1600&text=CTA",
+  backgroundImage = "/post-slide-1.jpg",
 }) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({

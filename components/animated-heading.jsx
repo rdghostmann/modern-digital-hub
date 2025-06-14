@@ -3,13 +3,6 @@
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
-// interface AnimatedHeadingProps {
-//   title: string
-//   subtitle?: string
-//   className?: string
-//   gradient?: boolean
-//   centered?: boolean
-// }
 
 export default function AnimatedHeading({
   title,
@@ -29,7 +22,8 @@ export default function AnimatedHeading({
       <h2
         className={cn(
           "text-2xl md:text-3xl font-bold mb-2",
-          gradient && "text-gray-700 bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text",
+          // gradient && "text-gray-700 bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text",
+          gradient && "bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent",
         )}
       >
         {title}
