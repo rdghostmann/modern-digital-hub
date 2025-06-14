@@ -8,19 +8,19 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft } from "lucide-react"
-import { useCart } from "@/contexts/cart-context"
+// import { useCart } from "@/contexts/cart-context"
 
 export default function CartPage() {
-  const { state, dispatch } = useCart()
+  // const { state, dispatch } = useCart()
   const [promoCode, setPromoCode] = useState("")
   const [promoDiscount, setPromoDiscount] = useState(0)
 
-  const updateQuantity = (id: number, quantity: number) => {
-    dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } })
+  const updateQuantity = (id, quantity) => {
+    // dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } })
   }
 
-  const removeItem = (id: number) => {
-    dispatch({ type: "REMOVE_ITEM", payload: id })
+  const removeItem = (id) => {
+    // dispatch({ type: "REMOVE_ITEM", payload: id })
   }
 
   const applyPromoCode = () => {
