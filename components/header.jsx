@@ -15,7 +15,7 @@ export default function Header() {
 
   const routes = [
     { href: "/", label: "Home" },
-    { href: "/blog", label: "Blog" },
+    // { href: "/blog", label: "Blog" },
     { href: "/store", label: "Store" },
     { href: "/videos", label: "Videos" },
   ]
