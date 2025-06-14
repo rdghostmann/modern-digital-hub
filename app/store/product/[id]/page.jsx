@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Star, Heart, ShoppingCart, Truck, Shield, RotateCcw, ChevronRight, Home, Minus, Plus } from "lucide-react"
-import { useCart } from "@/contexts/cart-context"
+// import { useCart } from "@/contexts/cart-context"
 import ProductCard from "@/components/product-card"
 import AdsBanner from "@/components/ads-banner"
 
@@ -116,24 +116,24 @@ const relatedProducts = [
 
 export default function ProductDetailPage() {
   const params = useParams()
-  const { dispatch } = useCart()
+  // const { dispatch } = useCart()
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [isFavorite, setIsFavorite] = useState(false)
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
-      dispatch({
-        type: "ADD_ITEM",
-        payload: {
-          id: sampleProduct.id,
-          name: sampleProduct.name,
-          price: sampleProduct.price,
-          discountPrice: sampleProduct.discountPrice,
-          image: sampleProduct.images[0],
-          category: sampleProduct.category,
-        },
-      })
+      // dispatch({
+      //   type: "ADD_ITEM",
+      //   payload: {
+      //     id: sampleProduct.id,
+      //     name: sampleProduct.name,
+      //     price: sampleProduct.price,
+      //     discountPrice: sampleProduct.discountPrice,
+      //     image: sampleProduct.images[0],
+      //     category: sampleProduct.category,
+      //   },
+      // })
     }
   }
 
