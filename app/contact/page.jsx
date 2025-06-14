@@ -121,11 +121,11 @@ export default function ContactPage() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    // setFormData((prev) => ({ ...prev, [name] }))
   }
 
   const handleSelectChange = (name, value) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    // setFormData((prev) => ({ ...prev, [name]}))
   }
 
   const handleSubmit = async (e) => {
