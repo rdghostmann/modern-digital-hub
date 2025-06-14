@@ -91,15 +91,16 @@ const HeroSection = () => {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="text-3xl md:text-5xl font-bold mb-4 relative z-10 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent"
-                    >
+                        // className="text-3xl md:text-5xl font-bold mb-4 relative z-10 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-gray-900 dark:text-gray-100 text-transparent"
+                        className="text-3xl md:text-5xl font-bold mb-4 relative z-10 text-gray-700 dark:text-gray-100 "
+                        >
                         Modern Blog & Store
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-lg md:text-xl text-gray-300 max-w-2xl"
+                        className="text-lg md:text-xl max-w-2xl text-gray-300 "
                     >
                         Discover the latest trends in technology, fashion, and travel with our curated content and premium
                         products.

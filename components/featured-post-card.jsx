@@ -7,25 +7,6 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Clock } from "lucide-react"
 
-// interface Author {
-//   name: string
-//   avatar: string
-// }
-
-// interface Post {
-//   id: number
-//   title: string
-//   excerpt: string
-//   category: string
-//   image: string
-//   author: Author
-//   date: string
-//   readTime: string
-// }
-
-// interface FeaturedPostCardProps {
-//   post: Post
-// }
 
 export default function FeaturedPostCard({ post }) {
   return (
@@ -64,10 +45,10 @@ export default function FeaturedPostCard({ post }) {
             />
             <div className="text-sm">
               <p className="font-medium">{post.author.name}</p>
-              <div className="flex items-center text-gray-500 dark:text-gray-400">
-                <span>{post.date}</span>
-                <span className="mx-1">•</span>
-                <Clock className="h-3 w-3 mr-1" />
+              <div className=" text-gray-500 dark:text-gray-400">
+                <p>{post.date}</p>
+                {/* <span className="mx-1">•</span> */}
+                <span><Clock className="h-3 w-3 mr-1" /></span>
                 <span>{post.readTime}</span>
               </div>
             </div>
