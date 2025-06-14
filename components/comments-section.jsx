@@ -82,15 +82,11 @@ const sampleComments = [
   },
 ]
 
-interface CommentsSectionProps {
-  postId: string | number
-  totalComments?: number
-}
 
-export default function CommentsSection({ postId, totalComments = 24 }: CommentsSectionProps) {
+export default function CommentsSection({ postId, totalComments = 24 }) {
   const [comments, setComments] = useState(sampleComments)
   const [newComment, setNewComment] = useState("")
-  const [replyingTo, setReplyingTo] = useState<number | null>(null)
+  const [replyingTo, setReplyingTo] = useState(null)
   const [replyText, setReplyText] = useState("")
   const [sortBy, setSortBy] = useState("newest")
 
@@ -115,7 +111,7 @@ export default function CommentsSection({ postId, totalComments = 24 }: Comments
     setNewComment("")
   }
 
-  const handleSubmitReply = (parentId: number) => {
+  const handleSubmitReply = (parentId) => {
     if (!replyText.trim()) return
 
     const reply = {
@@ -140,7 +136,7 @@ export default function CommentsSection({ postId, totalComments = 24 }: Comments
     setReplyingTo(null)
   }
 
-  const handleLike = (commentId: number, isReply = false, parentId?: number) => {
+  const handleLike = (commentId, isReply = false, parentId?) => {
     if (isReply && parentId) {
       setComments(
         comments.map((comment) =>
