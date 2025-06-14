@@ -5,15 +5,16 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Play, Clock, Eye, ThumbsUp, Share2 } from "lucide-react"
+import { Play, Clock, Eye, ThumbsUp, Share2, PlayCircle } from "lucide-react"
 import AnimatedHeading from "@/components/animated-heading"
+import Link from "next/link"
 
 const featuredVideo = {
   id: 1,
   title: "The Future of Sustainable Fashion: A Deep Dive into Eco-Friendly Materials",
   description:
     "Join us as we explore the latest innovations in sustainable fashion, from lab-grown materials to circular design principles that are reshaping the industry.",
-  thumbnail: "/placeholder.svg?height=400&width=600&text=Video+Thumbnail",
+  thumbnail: "/blog/blog-inside-post.jpg",
   duration: "12:34",
   views: "15.2K",
   likes: "1.2K",
@@ -21,7 +22,7 @@ const featuredVideo = {
   category: "Fashion",
   author: {
     name: "Emma Davis",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar: "/team/team-4.jpg",
   },
 }
 
@@ -29,7 +30,7 @@ const relatedVideos = [
   {
     id: 2,
     title: "Tech Gadgets That Will Change Your Life in 2024",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=Tech+Video",
+    thumbnail: "/blog/blog-6.jpg",
     duration: "8:45",
     views: "8.7K",
     category: "Technology",
@@ -37,7 +38,7 @@ const relatedVideos = [
   {
     id: 3,
     title: "Hidden Travel Gems in Southeast Asia",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=Travel+Video",
+    thumbnail: "/blog/blog-recent-4.jpg",
     duration: "15:22",
     views: "12.1K",
     category: "Travel",
@@ -45,7 +46,7 @@ const relatedVideos = [
   {
     id: 4,
     title: "Minimalist Living: Transform Your Space",
-    thumbnail: "/placeholder.svg?height=200&width=300&text=Lifestyle+Video",
+    thumbnail: "/blog/blog-recent-5.jpg",
     duration: "10:18",
     views: "9.3K",
     category: "Lifestyle",
@@ -122,7 +123,7 @@ export default function VideoOfTheWeek() {
                 </div>
 
                 <CardContent className="p-6">
-                  <h3 className="text-xl md:text-2xl font-bold mb-3 leading-tight">{featuredVideo.title}</h3>
+                  <h3 className="text-xl text-blue md:text-2xl font-bold mb-3 leading-tight">{featuredVideo.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400 mb-4">{featuredVideo.description}</p>
 
                   <div className="flex items-center justify-between mb-4">
@@ -194,7 +195,7 @@ export default function VideoOfTheWeek() {
                           </div>
                         </div>
                         <div className="p-3 flex-1">
-                          <h4 className="font-medium text-sm mb-1 line-clamp-2">{video.title}</h4>
+                          <h4 className="font-medium text-blue-500 text-sm mb-1 line-clamp-2">{video.title}</h4>
                           <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
                             <p>{video.views} views</p>
                             <Badge variant="secondary" className="text-xs">
@@ -210,7 +211,10 @@ export default function VideoOfTheWeek() {
 
               <div className="mt-6">
                 <Button variant="outline" className="w-full">
-                  View All Videos
+                  <Link href="/videos" className="flex items-center justify-center space-x-2">
+                    <PlayCircle className="h-4 w-4" />
+                    <span className="hidden sm:inline"> View All Videos </span>
+                  </Link>
                 </Button>
               </div>
             </motion.div>
