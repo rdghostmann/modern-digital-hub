@@ -101,7 +101,7 @@ export default function CheckoutPage() {
     }
   }
 
-  const subtotal = cartState.total
+  // const subtotal = cartState.total
   const shipping = subtotal > 50 ? 0 : 9.99
   const tax = subtotal * 0.08
   const total = subtotal + shipping + tax
@@ -355,7 +355,7 @@ export default function CheckoutPage() {
 
                 {/* Order Items */}
                 <div className="space-y-3 mb-4">
-                  {cartState.items.map((item) => (
+                  {/* {cartState.items.map((item) => (
                     <div key={item.id} className="flex items-center space-x-3">
                       <div className="relative h-12 w-12 rounded-md overflow-hidden">
                         <Image src={item.image || "/placeholder.svg"} alt={item.name} fill className="object-cover" />
@@ -368,7 +368,7 @@ export default function CheckoutPage() {
                         ${((item.discountPrice || item.price) * item.quantity).toFixed(2)}
                       </p>
                     </div>
-                  ))}
+                  ))} */}
                 </div>
 
                 <Separator className="my-4" />

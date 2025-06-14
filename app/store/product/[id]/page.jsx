@@ -123,17 +123,7 @@ export default function ProductDetailPage() {
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
-      // dispatch({
-      //   type: "ADD_ITEM",
-      //   payload: {
-      //     id: sampleProduct.id,
-      //     name: sampleProduct.name,
-      //     price: sampleProduct.price,
-      //     discountPrice: sampleProduct.discountPrice,
-      //     image: sampleProduct.images[0],
-      //     category: sampleProduct.category,
-      //   },
-      // })
+
     }
   }
 
