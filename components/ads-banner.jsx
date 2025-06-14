@@ -8,11 +8,6 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { X, ExternalLink } from "lucide-react"
 
-// interface AdsBannerProps {
-//   type?: "banner" | "sidebar" | "inline" | "popup"
-//   size?: "small" | "medium" | "large"
-//   position?: "top" | "middle" | "bottom"
-// }
 
 const adsData = {
   banner: {
@@ -73,9 +68,8 @@ export default function AdsBanner({ type = "banner", size = "medium", position =
 
   const AdContent = () => (
     <Card
-      className={`overflow-hidden ${isPopup ? "max-w-md w-full" : ""} ${
-        isHovered ? "shadow-lg" : ""
-      } transition-shadow duration-300`}
+      className={`overflow-hidden ${isPopup ? "max-w-md w-full" : ""} ${isHovered ? "shadow-lg" : ""
+        } transition-shadow duration-300`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -98,23 +92,22 @@ export default function AdsBanner({ type = "banner", size = "medium", position =
         <div className={`relative ${type === "sidebar" ? "block" : "flex"} ${sizeClasses[size]}`}>
           {/* Image */}
           <div
-            className={`relative ${
-              type === "sidebar" ? "w-full h-32" : type === "popup" ? "w-full h-40" : "w-1/3 md:w-1/2"
-            } overflow-hidden`}
+            className={`relative ${type === "sidebar" ? "w-full h-32" : type === "popup" ? "w-full h-40" : "w-1/3 md:w-1/2"
+              } overflow-hidden`}
           >
             <Image
               src={ad.image || "/placeholder.svg"}
               alt={ad.title}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className={`object-cover transition-transform duration-300 ${isHovered ? "scale-105" : ""}`}
             />
           </div>
 
           {/* Content */}
           <div
-            className={`${
-              type === "sidebar" ? "p-4" : type === "popup" ? "p-6" : "flex-1 p-4 md:p-6"
-            } flex flex-col justify-center`}
+            className={`${type === "sidebar" ? "p-4" : type === "popup" ? "p-6" : "flex-1 p-4 md:p-6"
+              } flex flex-col justify-center`}
           >
             <h3 className={`font-bold mb-2 ${type === "popup" ? "text-xl" : "text-sm md:text-base"}`}>{ad.title}</h3>
             <p className={`text-gray-600 dark:text-gray-400 mb-3 ${type === "sidebar" ? "text-xs" : "text-sm"}`}>

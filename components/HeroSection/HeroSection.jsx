@@ -73,14 +73,14 @@ const staggerContainer = {
 
 
 const HeroSection = () => {
-  useEffect(() => {
-    const handleScroll = () => {
-      document.documentElement.style.setProperty("--scroll", `${window.scrollY}px`)
-    }
+    useEffect(() => {
+        const handleScroll = () => {
+            document.documentElement.style.setProperty("--scroll", `${window.scrollY}px`)
+        }
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
     return (
         <section className="relative bg-gradient-to-r from-primary-700 to-secondary-700 text-white py-16 md:py-24 overflow-hidden">
             <div className="absolute inset-0 bg-black bg-hero-pattern bg-cover bg-center opacity-20"
@@ -93,7 +93,7 @@ const HeroSection = () => {
                         transition={{ duration: 0.8 }}
                         // className="text-3xl md:text-5xl font-bold mb-4 relative z-10 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-gray-900 dark:text-gray-100 text-transparent"
                         className="text-3xl md:text-5xl font-bold mb-4 relative z-10 text-gray-700 dark:text-gray-100 "
-                        >
+                    >
                         Modern Blog & Store
                     </motion.h1>
                     <motion.p
@@ -155,6 +155,7 @@ const HeroSection = () => {
                                             src={post.image || "/placeholder.svg"}
                                             alt={post.title}
                                             fill
+                                            sizes="(max-width: 768px) 100vw, 50vw"
                                             className="object-cover transition-transform duration-500 hover:scale-105"
                                         />
                                     </div>
