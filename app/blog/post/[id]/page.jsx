@@ -102,7 +102,7 @@ export default function SinglePostPage() {
   const params = useParams()
   const [isSharing, setIsSharing] = useState(false)
 
-  const handleShare = (platform: string) => {
+  const handleShare = (platform) => {
     setIsSharing(true)
     // Implement sharing logic here
     setTimeout(() => setIsSharing(false), 1000)
