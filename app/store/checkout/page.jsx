@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
@@ -13,13 +13,13 @@ import { Separator } from "@/components/ui/separator"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { CreditCard, Truck, Shield, ArrowLeft } from "lucide-react"
-import { useCart } from "@/contexts/cart-context"
-import { useAuth } from "@/contexts/auth-context"
+// import { useCart } from "@/contexts/cart-context"
+// import { useAuth } from "@/contexts/auth-context"
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { state: cartState, dispatch: cartDispatch } = useCart()
-  const { user, isAuthenticated, isLoading } = useAuth()
+  // const { state: cartState, dispatch: cartDispatch } = useCart()
+  // const { user, isAuthenticated, isLoading } = useAuth()
   const [isProcessing, setIsProcessing] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
@@ -41,32 +41,32 @@ export default function CheckoutPage() {
   })
 
   // Redirect to login if not authenticated
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.push("/login?redirect=/store/checkout")
-    }
-  }, [isAuthenticated, isLoading, router])
+  // useEffect(() => {
+  //   if (!isLoading && !isAuthenticated) {
+  //     router.push("/login?redirect=/store/checkout")
+  //   }
+  // }, [isAuthenticated, isLoading, router])
 
   // Redirect to cart if empty
-  useEffect(() => {
-    if (cartState.items.length === 0) {
-      router.push("/store/cart")
-    }
-  }, [cartState.items.length, router])
+  // useEffect(() => {
+  //   if (cartState.items.length === 0) {
+  //     router.push("/store/cart")
+  //   }
+  // }, [cartState.items.length, router])
 
   // Pre-fill user data if authenticated
-  useEffect(() => {
-    if (user) {
-      setFormData((prev) => ({
-        ...prev,
-        email: user.email,
-        firstName: user.name.split(" ")[0] || "",
-        lastName: user.name.split(" ")[1] || "",
-      }))
-    }
-  }, [user])
+  // useEffect(() => {
+  //   if (user) {
+  //     setFormData((prev) => ({
+  //       ...prev,
+  //       email: user.email,
+  //       firstName: user.name.split(" ")[0] || "",
+  //       lastName: user.name.split(" ")[1] || "",
+  //     }))
+  //   }
+  // }, [user])
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target
     setFormData((prev) => ({
       ...prev,
@@ -74,7 +74,7 @@ export default function CheckoutPage() {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (!formData.agreeToTerms) {
@@ -86,10 +86,10 @@ export default function CheckoutPage() {
 
     try {
       // Simulate payment processing
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      // await new Promise((resolve) => setTimeout(resolve, 2000))
 
       // Clear cart after successful order
-      cartDispatch({ type: "CLEAR_CART" })
+      // cartDispatch({ type: "CLEAR_CART" })
 
       // Redirect to success page
       router.push("/store/order-success")
@@ -311,7 +311,7 @@ export default function CheckoutPage() {
                       id="saveInfo"
                       name="saveInfo"
                       checked={formData.saveInfo}
-                      onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, saveInfo: checked as boolean }))}
+                      onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, saveInfo: checked }))}
                     />
                     <Label htmlFor="saveInfo" className="text-sm">
                       Save this information for next time
@@ -324,7 +324,7 @@ export default function CheckoutPage() {
                       name="agreeToTerms"
                       checked={formData.agreeToTerms}
                       onCheckedChange={(checked) =>
-                        setFormData((prev) => ({ ...prev, agreeToTerms: checked as boolean }))
+                        setFormData((prev) => ({ ...prev, agreeToTerms: checked }))
                       }
                       required
                     />
