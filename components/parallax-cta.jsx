@@ -5,13 +5,6 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-// interface ParallaxCTAProps {
-//   title: string
-//   description: string
-//   buttonText: string
-//   buttonLink: string
-//   backgroundImage?: string
-// }
 
 export default function ParallaxCTA({
   title,

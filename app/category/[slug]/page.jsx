@@ -140,7 +140,7 @@ export default function CategoryPage() {
       </div>
 
       {/* Category Hero */}
-      <section className="relative bg-gradient-to-r from-primary-700 to-secondary-700 text-white py-16 md:py-24">
+      <section className="relative bg-gradient-to-r from-primary-700 to-secondary-700 text-white pt-10 md:pt-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
