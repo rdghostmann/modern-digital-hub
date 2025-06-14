@@ -136,7 +136,7 @@ export default function CommentsSection({ postId, totalComments = 24 }) {
     setReplyingTo(null)
   }
 
-  const handleLike = (commentId, isReply = false, parentId?) => {
+  const handleLike = (commentId, isReply = false, parentId) => {
     if (isReply && parentId) {
       setComments(
         comments.map((comment) =>
