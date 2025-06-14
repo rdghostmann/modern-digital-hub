@@ -29,7 +29,7 @@ export default function AnimatedHeading({
       <h2
         className={cn(
           "text-2xl md:text-3xl font-bold mb-2",
-          gradient && "bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent",
+          gradient && "text-gray-700 bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text",
         )}
       >
         {title}

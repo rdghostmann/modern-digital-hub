@@ -64,7 +64,7 @@ export default function CategorySection() {
             <Card className="overflow-hidden h-full hover:shadow-lg transition-all duration-300 hover:border-primary-500 hover:-translate-y-1">
               <div className="relative h-40 w-full">
                 <Image src={category.image || "/post-landscape-1.jpg"} alt={category.name} fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent flex items-end">
+                <div className="absolute inset-0 bg-gradient-to-top from-primary-900/80 to-transparent flex items-end">
                   <div className="p-4 text-white">
                     <h3 className="text-xl font-bold">{category.name}</h3>
                     <p className="text-sm text-gray-200">{category.count} articles</p>

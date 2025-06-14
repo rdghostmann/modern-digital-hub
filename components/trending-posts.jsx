@@ -57,7 +57,7 @@ const trendingPosts = [
 
 export default function TrendingPosts() {
   return (
-    <Card className="sticky top-24">
+    <Card className="">
       <CardContent className="p-6">
         <div className="flex items-center mb-6">
           <TrendingUp className="h-5 w-5 text-accent mr-2" />
