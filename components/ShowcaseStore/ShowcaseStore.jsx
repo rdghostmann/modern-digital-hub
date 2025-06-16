@@ -114,8 +114,9 @@ export default function ShowcaseStore() {
                 <Image
                   src={slide.image}
                   alt={slide.title}
-                  fill
                   className="object-cover"
+                  width={320}
+                  height={320}
                   priority={slide.id === 1}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
