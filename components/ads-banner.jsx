@@ -100,7 +100,7 @@ export default function AdsBanner({ type = "banner", size = "medium", position =
               alt={ad.title}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className={`object-cover transition-transform duration-300 ${isHovered ? "scale-105" : ""}`}
+              className={`object-cover bg-center transition-transform duration-300 ${isHovered ? "scale-105" : ""}`}
             />
           </div>
 
