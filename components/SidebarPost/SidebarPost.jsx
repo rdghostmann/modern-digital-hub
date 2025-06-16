@@ -125,16 +125,16 @@ const SidebarPost = () => {
     const [activeTab, setActiveTab] = useState("all")
 
     const latestRef = useRef(null)
-    const latestInView = useInView(latestRef, { once: true, amount: 0.3 })
+    // const latestInView = useInView(latestRef, { once: true, amount: 0.3 })
 
-    useEffect(() => {
-        const handleScroll = () => {
-            document.documentElement.style.setProperty("--scroll", `${window.scrollY}px`)
-        }
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         document.documentElement.style.setProperty("--scroll", `${window.scrollY}px`)
+    //     }
 
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
+    //     window.addEventListener("scroll", handleScroll)
+    //     return () => window.removeEventListener("scroll", handleScroll)
+    // }, [])
 
     // Filter posts based on active tab
     const filteredPosts = activeTab === "all" ? posts : posts.filter((post) => post.category.toLowerCase() === activeTab)
@@ -142,14 +142,16 @@ const SidebarPost = () => {
     return (
         <section ref={latestRef} className="py-16">
             <div className="container mx-auto px-4">
-                <motion.div
+                {/* <motion.div
                     initial="hidden"
                     animate={latestInView ? "visible" : "hidden"}
                     variants={fadeInUp}
                     className="mb-10"
-                >
+                > */}
+                <div className="mb-10">
                     <AnimatedHeading title="Latest Articles" subtitle="Stay updated with our newest content" gradient={true} />
-                </motion.div>
+                </div>
+                {/* </motion.div> */}
 
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     {/* Main Content */}
@@ -171,16 +173,19 @@ const SidebarPost = () => {
                             </TabsList>
                         </Tabs>
 
-                        <motion.div
+                        {/* <motion.div
                             initial="hidden"
                             animate={latestInView ? "visible" : "hidden"}
                             variants={staggerContainer}
                             className="grid grid-cols-1 md:grid-cols-2 gap-8"
+                        > */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8"
                         >
                             {filteredPosts.map((post) => (
                                 <PostCard key={post.id} post={post} />
                             ))}
-                        </motion.div>
+                        </div>
+                        {/* </motion.div> */}
 
                         <div className="flex justify-center mt-12">
                             <Button variant="outline" size="lg">
