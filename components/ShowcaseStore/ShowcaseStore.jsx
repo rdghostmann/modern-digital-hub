@@ -115,9 +115,10 @@ export default function ShowcaseStore() {
                   src={slide.image}
                   alt={slide.title}
                   className="object-cover"
+                  // fill
                   width={320}
                   height={320}
-                  priority={slide.id === 1}
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </motion.div>
