@@ -51,7 +51,7 @@ const HeroSection = () => {
             className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-20"
         >
             <div className="container mx-auto px-4">
-                <motion.div
+                {/* <motion.div
                     className="text-center mb-10"
                     initial="hidden"
                     whileInView="visible"
@@ -64,7 +64,7 @@ const HeroSection = () => {
                     <p className="text-gray-300 max-w-2xl mx-auto">
                         Handpicked articles with inspiration, lifestyle, and trends for you.
                     </p>
-                </motion.div>
+                </motion.div> */}
 
                 <Splide
                     options={{

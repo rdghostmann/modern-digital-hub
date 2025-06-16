@@ -17,11 +17,11 @@ export default function Home() {
     // <div className="pt-16">
     <div className="pt-3">
       {/* Top Banner Ad */}
-      <div className="bg-gray-50 dark:bg-gray-900 py-4">
+      {/* <div className="bg-gray-50 dark:bg-gray-900 py-4">
         <div className="container mx-auto px-4">
           <AdsBanner type="banner" size="medium" />
         </div>
-      </div>
+      </div> */}
 
       {/* Hero Section with Featured Posts Carousel */}
       <HeroSection />

@@ -115,7 +115,7 @@ export default function ShowcaseStore() {
                   src={slide.image}
                   alt={slide.title}
                   className="object-cover"
-                  // fill
+                  // fil
                   width={320}
                   height={320}
                   priority
