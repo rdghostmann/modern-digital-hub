@@ -73,7 +73,7 @@ const HeroSection = () => {
                         autoplay: true,
                         interval: 5000,
                         pauseOnHover: true,
-                        arrows: true,
+                        arrows: false,
                         pagination: true,
                     }}
                     className="rounded-lg overflow-hidden"
