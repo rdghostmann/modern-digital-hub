@@ -284,7 +284,7 @@ export default function StorePage() {
             variants={fadeInUp}
             className="mb-10"
           >
-            <AnimatedHeading title="Featured Products" subtitle="Our most popular and trending items" gradient={true} />
+            <AnimatedHeading title="Featured Products"  subtitle="Our most popular and trending items" gradient={true} />
           </motion.div>
 
           <Splide
@@ -367,7 +367,8 @@ export default function StorePage() {
             variants={fadeInUp}
             className="flex flex-wrap items-center justify-between mb-10"
           >
-            <AnimatedHeading title="All Products" subtitle="Browse our complete collection" gradient={true} />
+            <h4 className="text-sm sm:text-lg font-bold text-gray-600">All Product</h4>
+            <p className="text-gray-500 ">Browse our complete collection</p>
             <Button variant="outline" onClick={() => setShowFilters(!showFilters)} className="flex items-center gap-2">
               <Filter className="h-4 w-4" />
               Filters
@@ -427,7 +428,7 @@ export default function StorePage() {
         ref={newsletterRef}
         className="py-16 relative overflow-hidden"
         style={{
-          backgroundImage: "url('/placeholder-newsletter.jpg')",
+          backgroundImage: "url('/about-company-2.jpg')",
           backgroundAttachment: "fixed",
           backgroundPosition: "center",
           backgroundSize: "cover",
