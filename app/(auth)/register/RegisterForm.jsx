@@ -68,7 +68,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="bg-[#1a1c1a] w-full max-w-md p-8 rounded-2xl shadow-lg">
         <h2 className="text-3xl font-bold text-white text-center mb-6">Sign up</h2>
         <p className="text-lg text-gray-400 text-center mb-8">Fill in your details to get started</p>
@@ -183,7 +183,7 @@ const RegisterForm = () => {
           </Link>
         </p>
       </div>
-    </section>
+    </div>
   );
 };
 
