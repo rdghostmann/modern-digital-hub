@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ShoppingCart, Heart, Star } from "lucide-react"
+import { AddToCartButton } from "@/components/add-to-cart-button";
 
 
 export default function ProductCard({ product }) {
@@ -21,10 +22,6 @@ export default function ProductCard({ product }) {
     setIsFavorite(!isFavorite)
   }
 
-  const handleAddToCart = (e) => {
-    e.preventDefault()
-
-  }
 
   return (
     <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.3 }}>
@@ -44,7 +41,7 @@ export default function ProductCard({ product }) {
               priority
             /> */}
 
-             <div
+            <div
               className="absolute inset-0 transition-transform duration-500"
               style={{
                 backgroundImage: `url(${product.image || "/placeholder.svg"})`,
@@ -72,15 +69,7 @@ export default function ProductCard({ product }) {
               animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg p-1 flex gap-1">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full h-9 w-9 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  onClick={handleAddToCart}
-                >
-                  <ShoppingCart className="h-4 w-4" />
-                </Button>
+              <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg p-1 flex gap-1">                <AddToCartButton product={product} />
                 <Button
                   variant="ghost"
                   size="icon"

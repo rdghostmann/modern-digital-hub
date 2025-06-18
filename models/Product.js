@@ -1,53 +1,36 @@
 import mongoose from "mongoose"
 
-const ProductSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const ReviewSchema = new mongoose.Schema(
+  {
+    user: String,
+    avatar: String,
+    rating: Number,
+    date: String,
+    comment: String,
   },
-  description: {
-    type: String,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  discountPrice: {
-    type: Number,
-    default: null,
-  },
-  image: {
-    type: String,
-  },
-  rating: {
-    type: Number,
-    default: 0,
-  },
-  reviewCount: {
-    type: Number,
-    default: 0,
-  },
-  category: {
-    type: String,
-    required: true,
-  },
-  isNew: {
-    type: Boolean,
-    default: false,
-  },
-  isFeatured: {
-    type: Boolean,
-    default: false,
-  },
-  features: {
-    type: [String],
-    default: [],
-  },
-  specs: {
-    type: mongoose.Schema.Types.Mixed,
-    default: {},
-  },
-})
+  { _id: false }
+);
 
-const Product = mongoose.models.Product || mongoose.model("Product", ProductSchema)
-export default Product
+const ProductSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  brand: { type: String },
+  sku: { type: String },
+  price: { type: Number, required: true },
+  discountPrice: { type: Number, default: null },
+  images: { type: [String], default: [] },
+  image: { type: String }, // for backward compatibility
+  rating: { type: Number, default: 0 },
+  reviewCount: { type: Number, default: 0 },
+  category: { type: String, required: true },
+  inStock: { type: Boolean, default: true },
+  stockCount: { type: Number, default: 0 },
+  description: { type: String },
+  isNewArrival: { type: Boolean, default: false },
+  isFeatured: { type: Boolean, default: false },
+  features: { type: [String], default: [] },
+  specifications: { type: mongoose.Schema.Types.Mixed, default: {} },
+  reviews: { type: [ReviewSchema], default: [] },
+});
+
+const Product = mongoose.models.Product || mongoose.model("Product", ProductSchema);
+export default Product;
