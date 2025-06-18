@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { CreditCard, Truck, Shield, ArrowLeft } from "lucide-react"
 import { useCartStore } from "@/store/cart-store"
 
-export default function CheckoutPage({ username, email, role }) {
+export default function CheckoutPage({ email }) {
     const router = useRouter()
     const cartItems = useCartStore((state) => state.items)
     const clearCart = useCartStore((state) => state.clearCart)
@@ -31,7 +31,7 @@ export default function CheckoutPage({ username, email, role }) {
 
 
     const [formData, setFormData] = useState({
-        email: "",
+        email,
         firstName: "",
         lastName: "",
         address: "",
@@ -48,11 +48,6 @@ export default function CheckoutPage({ username, email, role }) {
         saveInfo: false,
         agreeToTerms: false,
     })
-
-    // Optionally, prefill email if user is logged in
-    // useEffect(() => {
-    //   if (user) setFormData((prev) => ({ ...prev, email: user.email }))
-    // }, [user])
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target
@@ -145,7 +140,7 @@ export default function CheckoutPage({ username, email, role }) {
                                             value={formData.email}
                                             onChange={handleInputChange}
                                             required
-                                        // disabled={!!user}
+                                            disabled
                                         />
                                     </div>
                                     <div>
@@ -237,6 +232,13 @@ export default function CheckoutPage({ username, email, role }) {
                                     onValueChange={(value) => setFormData((prev) => ({ ...prev, paymentMethod: value }))}
                                     className="mb-6"
                                 >
+                                    <div className="flex items-center space-x-2 p-3 border rounded-md">
+                                        <RadioGroupItem value="transfer" id="transfer" />
+                                        <Label htmlFor="transfer" className="flex items-center cursor-pointer">
+                                            <Truck className="h-4 w-4 mr-2" />
+                                            Bank Transfer
+                                        </Label>
+                                    </div>
                                     <div className="flex items-center space-x-2 p-3 border rounded-md mb-2">
                                         <RadioGroupItem value="card" id="card" />
                                         <Label htmlFor="card" className="flex items-center cursor-pointer">
@@ -438,7 +440,7 @@ export default function CheckoutPage({ username, email, role }) {
                         </div>
                     </div>
                 </form>
-            </div> 
+            </div>
         </div>
     )
 }

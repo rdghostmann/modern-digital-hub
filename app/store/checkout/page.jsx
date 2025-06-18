@@ -10,7 +10,7 @@ export default async function Checkout() {
     redirect("/login")
   }
 
-  const { username, email, role } = session.user
+  const { email } = session.user
 
-  return <CheckoutPage username={username} email={email} role={role} />
+  return <CheckoutPage email={email} />
 }
