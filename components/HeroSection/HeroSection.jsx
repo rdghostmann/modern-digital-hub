@@ -19,7 +19,7 @@ const slides = [
             "17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut",
         excerpt:
             "Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore.",
-        image: "/post-slide-1.jpg",
+        image: "/post-slide-2.jpg",
         link: "/single-post",
     },
     {
@@ -27,14 +27,14 @@ const slides = [
             "13 Amazing Poems from Shel Silverstein with Valuable Life Lessons",
         excerpt:
             "Repudiandae quidem necessitatibus rem atque. Discover insights from timeless poetry.",
-        image: "/post-slide-1.jpg",
+        image: "/post-slide-3.jpg",
         link: "/single-post",
     },
     {
         title: "9 Half-up/half-down Hairstyles for Long and Medium Hair",
         excerpt:
             "Stylish and versatile hairstyles for any occasion. Explore the best looks now.",
-        image: "/post-slide-1.jpg",
+        image: "/post-slide-4.jpg",
         link: "/single-post",
     },
 ]

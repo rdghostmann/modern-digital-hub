@@ -46,7 +46,7 @@ export default function ProductCard({ product }) {
               style={{
                 backgroundImage: `url(${product.image || "/placeholder.svg"})`,
                 backgroundSize: "cover",
-                backgroundPosition: "center",
+                backgroundPosition: "top center",
                 transform: isHovered ? "scale(1.05)" : "scale(1)",
               }}
               aria-label={product.name}
