@@ -86,7 +86,7 @@ function CartSidebarComponent() {
               <span className="font-bold">₦{getTotal().toFixed(2)}</span>
             </div>
             <Button asChild className="w-full mb-2" disabled={items.length === 0}>
-              <Link href="/checkout" onClick={closeCart}>Checkout</Link>
+              <Link href="/store/checkout" onClick={closeCart}>Checkout</Link>
             </Button>
             <Button variant="outline" className="w-full" onClick={clearCart} disabled={items.length === 0}>
               Clear Cart
