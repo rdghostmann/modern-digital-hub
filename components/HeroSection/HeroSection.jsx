@@ -51,8 +51,8 @@ const HeroSection = () => {
             className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-20"
         >
             <div className="container mx-auto px-4">
-                {/* <motion.div
-                    className="text-center mb-10"
+                <motion.div
+                    className="text-center mb-5"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
@@ -64,7 +64,7 @@ const HeroSection = () => {
                     <p className="text-gray-300 max-w-2xl mx-auto">
                         Handpicked articles with inspiration, lifestyle, and trends for you.
                     </p>
-                </motion.div> */}
+                </motion.div>
 
                 <Splide
                     options={{
@@ -88,7 +88,7 @@ const HeroSection = () => {
                             >
                                 <div className="bg-black/60 p-6 rounded-md max-w-2xl">
                                     <motion.h3
-                                        className="text-2xl md:text-3xl font-bold mb-3"
+                                        className="text-2xl md:text-lg font-bold mb-3"
                                         initial="hidden"
                                         whileInView="visible"
                                         variants={fadeVariant}
@@ -99,7 +99,7 @@ const HeroSection = () => {
                                         </Link>
                                     </motion.h3>
                                     <motion.p
-                                        className="text-gray-300"
+                                        className="text-sm md:text-lg text-gray-300"
                                         initial="hidden"
                                         whileInView="visible"
                                         variants={fadeVariant}
