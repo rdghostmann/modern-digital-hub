@@ -21,7 +21,7 @@ export default function ProductDetailPage({ relatedProducts, sampleProduct }) {
   const [quantity, setQuantity] = useState(1)
   const [isFavorite, setIsFavorite] = useState(false)
 
-    // Ensure images is always an array and fallback to image or placeholder
+  // Ensure images is always an array and fallback to image or placeholder
   const images =
     Array.isArray(sampleProduct.images) && sampleProduct.images.length > 0
       ? sampleProduct.images
@@ -29,7 +29,7 @@ export default function ProductDetailPage({ relatedProducts, sampleProduct }) {
         ? [sampleProduct.image]
         : ["/placeholder.svg"]
 
-   const discountPercentage = sampleProduct.discountPrice
+  const discountPercentage = sampleProduct.discountPrice
     ? Math.round(((sampleProduct.price - sampleProduct.discountPrice) / sampleProduct.price) * 100)
     : 0
 
@@ -56,7 +56,7 @@ export default function ProductDetailPage({ relatedProducts, sampleProduct }) {
             </Link>
             <ChevronRight className="h-4 w-4 text-gray-400" />
             <Link
-              href={`/store/category/${sampleProduct.category.toLowerCase()}`}
+              href={`/store/category/${sampleProduct.category?.toLowerCase?.() || ""}`}
               className="text-gray-600 dark:text-gray-400 hover:text-primary-600"
             >
               {sampleProduct.category}
@@ -184,9 +184,9 @@ export default function ProductDetailPage({ relatedProducts, sampleProduct }) {
 
                   <div className="flex space-x-4">
                     <AddToCartButton product={sampleProduct} />
-                    <Button variant="outline" size="icon" onClick={() => setIsFavorite(!isFavorite)}>
-                      <Heart className={`h-4 w-4 ${isFavorite ? "fill-current text-red-500" : ""}`} />
-                    </Button>
+  <Button variant="outline" size="icon" onClick={() => setIsFavorite(!isFavorite)}>
+    <Heart className={`h-4 w-4 ${isFavorite ? "fill-current text-red-500" : ""}`} />
+  </Button>
                   </div>
                 </div>
 
@@ -332,7 +332,10 @@ export default function ProductDetailPage({ relatedProducts, sampleProduct }) {
 
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-8">
-            <AdsBanner type="sidebar" size="large" />
+            <div className="my-8 mx-auto">
+              <AdsBanner type="sidebar" size="large" />
+            </div>
+
 
             {/* Recently Viewed */}
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
@@ -342,7 +345,11 @@ export default function ProductDetailPage({ relatedProducts, sampleProduct }) {
                   <Link key={product.id} href={`/store/product/${product.id}`} className="flex space-x-3 group">
                     <div className="relative w-16 h-16 rounded-md overflow-hidden">
                       <Image
-                        src={product.image || "/placeholder.svg"}
+                        src={
+                          (Array.isArray(product.images) && product.images.length > 0
+                            ? product.images[0]
+                            : product.image) || "/placeholder.svg"
+                        }
                         alt={product.name}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"

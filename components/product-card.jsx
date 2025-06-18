@@ -9,7 +9,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ShoppingCart, Heart, Star } from "lucide-react"
+import { Heart, Star } from "lucide-react"
 import { AddToCartButton } from "@/components/add-to-cart-button";
 
 
@@ -69,7 +69,8 @@ export default function ProductCard({ product }) {
               animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg p-1 flex gap-1">                <AddToCartButton product={product} />
+              <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg p-1 flex gap-1">
+                <AddToCartButton product={product} />
                 <Button
                   variant="ghost"
                   size="icon"
