@@ -74,21 +74,21 @@ export default function ShowcaseStore() {
       >
         {slides.map((slide) => (
           <SplideSlide key={slide.id}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="flex flex-col-reverse md:flex-row items-center gap-8 w-full">
               {/* Content */}
               <motion.div
                 initial="hidden"
                 animate="visible"
                 variants={fadeIn}
-                className="space-y-6 text-center md:text-left"
+                className="flex-1 flex flex-col justify-center items-center md:items-start space-y-6 text-center md:text-left w-full"
               >
-                <motion.h2 
+                <motion.h2
                   className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent"
                   variants={fadeIn}
                 >
                   {slide.title}
                 </motion.h2>
-                <motion.p 
+                <motion.p
                   className="text-lg text-gray-300 max-w-2xl mx-auto md:mx-0"
                   variants={fadeIn}
                 >
@@ -106,21 +106,22 @@ export default function ShowcaseStore() {
 
               {/* Image */}
               <motion.div
-                className="relative h-64 md:h-96 rounded-xl overflow-hidden"
+                className="flex-1 flex justify-center items-center w-full h-64 md:h-96 rounded-xl overflow-hidden"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
               >
-                <Image
-                  src={slide.image}
-                  alt={slide.title}
-                  className="object-cover"
-                  // fil
-                  width={320}
-                  height={320}
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="relative w-full h-full max-w-xs md:max-w-md">
+                  <Image
+                    src={slide.image}
+                    alt={slide.title}
+                    className="object-cover"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 320px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                </div>
               </motion.div>
             </div>
           </SplideSlide>

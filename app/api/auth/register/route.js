@@ -2,14 +2,14 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import User from "@/models/User";
 import { connectToDB } from "@/lib/connectDB";
-import { v4 as uuidv4 } from "uuid"; // <-- Import uuidv4
+import { v4 as uuidv4 } from "uuid";
 
 export async function POST(req) {
   try {
     await connectToDB();
-    const { username, email, password, phone } = await req.json();
+    const { username, email, password, phone, role, isActive } = await req.json();
 
-    if (!username || !email || !password || !phone) {
+    if (!username || !email || !password || !phone || !role || typeof isActive === "undefined") {
       return NextResponse.json({ error: "All fields are required." }, { status: 400 });
     }
 
@@ -30,7 +30,8 @@ export async function POST(req) {
       email,
       password: hashedPassword,
       phone,
-      role: "user", // Default role
+      role,
+      isActive: isActive === "true" // convert string to boolean
     });
 
     return NextResponse.json({

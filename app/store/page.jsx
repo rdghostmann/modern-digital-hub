@@ -51,7 +51,7 @@ const featuredProducts = [
     name: "Premium Wireless Headphones",
     price: 199.99,
     discountPrice: 149.99,
-    image: "/placeholder-smartwatch.png",
+    image: "/placeholder-headphones.png",
     rating: 4.8,
     reviewCount: 124,
     category: "Electronics",
@@ -63,7 +63,7 @@ const featuredProducts = [
     name: "Minimalist Leather Watch",
     price: 89.99,
     discountPrice: null,
-    image: "/placeholder-smartwatch.png",
+    image: "/minimalist-leather-watch.jpg",
     rating: 4.5,
     reviewCount: 86,
     category: "Accessories",
@@ -75,7 +75,7 @@ const featuredProducts = [
     name: "Organic Cotton T-Shirt",
     price: 34.99,
     discountPrice: 24.99,
-    image: "/white-singlet.jpg",
+    image: "/organic-cotton-t-shirt.jpg",
     rating: 4.7,
     reviewCount: 215,
     category: "Clothing",
@@ -128,7 +128,7 @@ const products = [
     name: "Recycled Canvas Backpack",
     price: 59.99,
     discountPrice: null,
-    image: "/placeholder-smartwatch.png",
+    image: "/canvas-backpack.jpg",
     rating: 4.7,
     reviewCount: 103,
     category: "Accessories",
@@ -140,7 +140,7 @@ const products = [
     name: "Stainless Steel Water Bottle",
     price: 29.99,
     discountPrice: 19.99,
-    image: "/placeholder-smartwatch.png",
+    image: "/stainless-steel-water-bottle.jpg",
     rating: 4.8,
     reviewCount: 156,
     category: "Home",
@@ -176,7 +176,7 @@ const products = [
     name: "Sustainable Bamboo Toothbrush",
     price: 9.99,
     discountPrice: null,
-    image: "/placeholder-smartwatch.png",
+    image: "/bamboo-toothbrush.jpg",
     rating: 4.7,
     reviewCount: 203,
     category: "Health",
@@ -188,7 +188,7 @@ const products = [
     name: "Organic Lip Balm Set",
     price: 14.99,
     discountPrice: 12.99,
-    image: "/placeholder-smartwatch.png",
+    image: "/organic-lip-balm-set.jpg",
     rating: 4.8,
     reviewCount: 118,
     category: "Health",
@@ -284,7 +284,7 @@ export default function StorePage() {
             variants={fadeInUp}
             className="mb-10"
           >
-            <AnimatedHeading title="Featured Products"  subtitle="Our most popular and trending items" gradient={true} />
+            <AnimatedHeading title="Featured Products" subtitle="Our most popular and trending items" gradient={true} />
           </motion.div>
 
           <Splide
@@ -367,8 +367,7 @@ export default function StorePage() {
             variants={fadeInUp}
             className="flex flex-wrap items-center justify-between mb-10"
           >
-            <h4 className="text-sm sm:text-lg font-bold text-gray-600">All Product</h4>
-            <p className="text-gray-500 ">Browse our complete collection</p>
+            <AnimatedHeading title="All Products" subtitle="Browse our complete collection" gradient={true} />
             <Button variant="outline" onClick={() => setShowFilters(!showFilters)} className="flex items-center gap-2">
               <Filter className="h-4 w-4" />
               Filters
@@ -393,12 +392,7 @@ export default function StorePage() {
             )}
 
             {/* Products Grid */}
-            <motion.div
-              initial="hidden"
-              animate={productsInView ? "visible" : "hidden"}
-              variants={staggerContainer}
-              className={`${showFilters || isLargeScreen ? "lg:col-span-3" : "lg:col-span-4"}`}
-            >
+            <div className={`${showFilters || isLargeScreen ? "lg:col-span-3" : "lg:col-span-4"}`}           >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
@@ -418,7 +412,7 @@ export default function StorePage() {
                   </Button>
                 </div>
               )}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

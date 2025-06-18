@@ -30,6 +30,10 @@ export default function FilterSidebar({ activeCategory, setActiveCategory, onClo
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
     >
+       <div>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Search</h3>
+        <Input type="text" placeholder="Search products..." className="bg-white dark:bg-gray-700" />
+      </div>
       <div>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Category</h3>
         <ul className="space-y-2">
@@ -77,10 +81,7 @@ export default function FilterSidebar({ activeCategory, setActiveCategory, onClo
         <Slider defaultValue={priceRange} max={200} step={10} onValueChange={(value) => setPriceRange(value)} />
       </div>
 
-      <div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Search</h3>
-        <Input type="text" placeholder="Search products..." className="bg-white dark:bg-gray-700" />
-      </div>
+     
     </motion.div>
   )
 }

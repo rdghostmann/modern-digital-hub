@@ -3,25 +3,49 @@ import mongoose from "mongoose"
 const ProductSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
-    type: String
+    type: String,
   },
   price: {
     type: Number,
-    required: true
+    required: true,
+  },
+  discountPrice: {
+    type: Number,
+    default: null,
+  },
+  image: {
+    type: String,
+  },
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  reviewCount: {
+    type: Number,
+    default: 0,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  isNew: {
+    type: Boolean,
+    default: false,
+  },
+  isFeatured: {
+    type: Boolean,
+    default: false,
   },
   features: {
     type: [String],
-    default: []
+    default: [],
   },
   specs: {
-    type: mongoose.Schema.Types.Mixed, // Allows for flexible key-value pairs
-    default: {}
-  },
-  image: {
-    type: String
+    type: mongoose.Schema.Types.Mixed,
+    default: {},
   },
 })
 

@@ -35,19 +35,31 @@ export default function ProductCard({ product }) {
           onMouseLeave={() => setIsHovered(false)}
         >
           <Link href={`/store/product/${product.id}`}>
-            <Image
+            {/* <Image
               src={product.image || "/placeholder.svg"}
               alt={product.name}
               fill
               className="object-cover transition-transform duration-500"
               style={{ transform: isHovered ? "scale(1.05)" : "scale(1)" }}
+              priority
+            /> */}
+
+             <div
+              className="absolute inset-0 transition-transform duration-500"
+              style={{
+                backgroundImage: `url(${product.image || "/placeholder.svg"})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                transform: isHovered ? "scale(1.05)" : "scale(1)",
+              }}
+              aria-label={product.name}
             />
 
             {/* Product badges */}
             <div className="absolute top-3 left-3 flex flex-col gap-2">
-              {product.isNew && <Badge className="bg-secondary-500 hover:bg-secondary-600">New</Badge>}
+              {product.isNew && <Badge className="bg-blue-500 hover:bg-blue-600">New</Badge>}
               {product.discountPrice && (
-                <Badge className="bg-accent-500 hover:bg-accent-600">
+                <Badge className="bg-stone-400 hover:bg-gray-400">
                   {Math.round(((product.price - product.discountPrice) / product.price) * 100)}% OFF
                 </Badge>
               )}
