@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { CreditCard, Truck, Shield, ArrowLeft } from "lucide-react"
 import { useCartStore } from "@/store/cart-store"
 
-export default function CheckoutPage({username, email, role}) {
+export default function CheckoutPage({ username, email, role }) {
     const router = useRouter()
     const cartItems = useCartStore((state) => state.items)
     const clearCart = useCartStore((state) => state.clearCart)
@@ -29,7 +29,7 @@ export default function CheckoutPage({username, email, role}) {
     const [isLoading, setIsLoading] = useState(false)
     const [isProcessing, setIsProcessing] = useState(false)
 
- 
+
     const [formData, setFormData] = useState({
         email: "",
         firstName: "",
@@ -222,6 +222,7 @@ export default function CheckoutPage({username, email, role}) {
                                 </div>
                             </motion.div>
 
+
                             {/* Payment Method */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
@@ -236,11 +237,18 @@ export default function CheckoutPage({username, email, role}) {
                                     onValueChange={(value) => setFormData((prev) => ({ ...prev, paymentMethod: value }))}
                                     className="mb-6"
                                 >
-                                    <div className="flex items-center space-x-2 p-3 border rounded-md">
+                                    <div className="flex items-center space-x-2 p-3 border rounded-md mb-2">
                                         <RadioGroupItem value="card" id="card" />
                                         <Label htmlFor="card" className="flex items-center cursor-pointer">
                                             <CreditCard className="h-4 w-4 mr-2" />
                                             Credit/Debit Card
+                                        </Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2 p-3 border rounded-md">
+                                        <RadioGroupItem value="transfer" id="transfer" />
+                                        <Label htmlFor="transfer" className="flex items-center cursor-pointer">
+                                            <Truck className="h-4 w-4 mr-2" />
+                                            Bank Transfer
                                         </Label>
                                     </div>
                                 </RadioGroup>
@@ -258,7 +266,6 @@ export default function CheckoutPage({username, email, role}) {
                                                 required
                                             />
                                         </div>
-
                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                             <div>
                                                 <Label htmlFor="expiryDate">Expiry Date</Label>
@@ -292,6 +299,28 @@ export default function CheckoutPage({username, email, role}) {
                                                     required
                                                 />
                                             </div>
+                                        </div>
+                                    </div>
+                                )}
+
+
+                                {formData.paymentMethod === "transfer" && (
+                                    <div className="space-y-4 bg-gray-50 dark:bg-gray-900 rounded-md p-4 border mt-4">
+                                        <h3 className="font-semibold mb-2">Bank Transfer Details</h3>
+                                        <div>
+                                            <Label>Bank Name</Label>
+                                            <div className="font-medium">Zenith Bank</div>
+                                        </div>
+                                        <div>
+                                            <Label>Account Name</Label>
+                                            <div className="font-medium">BlogStore Ltd</div>
+                                        </div>
+                                        <div>
+                                            <Label>Account Number</Label>
+                                            <div className="font-medium tracking-widest">1234567890</div>
+                                        </div>
+                                        <div className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                                            Please make your payment to the above account and include your email as the payment reference. Your order will be processed once payment is confirmed.
                                         </div>
                                     </div>
                                 )}
@@ -354,7 +383,7 @@ export default function CheckoutPage({username, email, role}) {
                                                 <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
                                             </div>
                                             <p className="text-sm font-medium">
-                                                ${((item.discountPrice || item.price) * item.quantity).toFixed(2)}
+                                                ₦{((item.discountPrice || item.price) * item.quantity).toFixed(2)}
                                             </p>
                                         </div>
                                     ))}
@@ -366,7 +395,7 @@ export default function CheckoutPage({username, email, role}) {
                                 <div className="space-y-2 mb-4">
                                     <div className="flex justify-between text-sm">
                                         <span>Subtotal</span>
-                                        <span>${subtotal.toFixed(2)}</span>
+                                        <span>₦{subtotal.toFixed(2)}</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
                                         <span>Shipping</span>
@@ -374,12 +403,12 @@ export default function CheckoutPage({username, email, role}) {
                                     </div>
                                     <div className="flex justify-between text-sm">
                                         <span>Tax</span>
-                                        <span>${tax.toFixed(2)}</span>
+                                        <span>₦{tax.toFixed(2)}</span>
                                     </div>
                                     <Separator />
                                     <div className="flex justify-between font-semibold">
                                         <span>Total</span>
-                                        <span>${total.toFixed(2)}</span>
+                                        <span>₦{total.toFixed(2)}</span>
                                     </div>
                                 </div>
 
@@ -402,14 +431,14 @@ export default function CheckoutPage({username, email, role}) {
                                             Processing...
                                         </>
                                     ) : (
-                                        `Complete Order - $${total.toFixed(2)}`
+                                        `Complete Order - ₦${total.toFixed(2)}`
                                     )}
                                 </Button>
                             </motion.div>
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> 
         </div>
     )
 }
