@@ -242,7 +242,7 @@ const Signin = () => {
                       {loginError}
                     </motion.div>
                   )}
-                  <form onSubmit={handleLoginSubmit} className="space-y-5 w-full max-w-sm">
+                  <form onSubmit={handleLoginSubmit} className="space-y-1 w-full max-w-sm">
                     <div className="space-y-2">
                       <Label htmlFor="login-email" className="text-gray-300">
                         Email
@@ -325,7 +325,7 @@ const Signin = () => {
                     </motion.div>
                   )}
                   <form
-                    className="space-y-5 w-full max-w-sm"
+                    className="space-y-1 w-full max-w-sm"
                     onSubmit={handleRegisterSubmit}
                   >
                     <div className="space-y-2">
@@ -334,6 +334,7 @@ const Signin = () => {
                         type="text"
                         id="register-username"
                         name="username"
+                        placeholder="Your username"
                         value={registerData.username}
                         onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
                         required
@@ -346,6 +347,7 @@ const Signin = () => {
                         type="email"
                         id="register-email"
                         name="email"
+                        placeholder="Your email"
                         value={registerData.email}
                         onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
                         required
@@ -358,6 +360,7 @@ const Signin = () => {
                         type="tel"
                         id="register-phone"
                         name="phone"
+                        placeholder="Your phone number"
                         value={registerData.phone}
                         onChange={(e) => setRegisterData({ ...registerData, phone: e.target.value })}
                         required
@@ -372,6 +375,7 @@ const Signin = () => {
                           type={registerShowPassword ? "text" : "password"}
                           id="register-password"
                           name="password"
+                          placeholder="Your Password"
                           value={registerData.password}
                           onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
                           required
