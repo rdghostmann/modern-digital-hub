@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from 'sonner';
+import CopyrightYear from '@/components/CopyrightYear/CopyrightYear';
 
 // Quotes for the carousel
 const quotes = [
@@ -142,8 +143,11 @@ const RegisterForm = () => {
           <div className="relative z-10 flex-1 flex flex-col justify-center w-full">
             <QuoteCarousel />
           </div>
-          <div className="relative z-10 mb-8 text-center text-gray-300 text-xs">
+          {/* <div className="relative z-10 mb-8 text-center text-gray-300 text-xs">
             &copy; {new Date().getFullYear()} BlogStore. Write. Share. Inspire.
+          </div> */}
+          <div className="relative z-10 mb-8 text-center text-gray-300 text-xs">
+            <CopyrightYear />
           </div>
         </motion.div>
 

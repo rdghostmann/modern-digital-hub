@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import CopyrightYear from "@/components/CopyrightYear/CopyrightYear";
 
 const quotes = [
   {
@@ -133,8 +134,11 @@ const LoginForm = () => {
             <QuoteCarousel />
           </div>
 
+          {/* <div className="relative z-10 mb-8 text-center text-gray-300 text-xs">
+            &copy; 2025 BlogStore. Write. Share. Inspire.
+          </div> */}
           <div className="relative z-10 mb-8 text-center text-gray-300 text-xs">
-            &copy; {new Date().getFullYear()} BlogStore. Write. Share. Inspire.
+            <CopyrightYear />
           </div>
         </motion.div>
 
@@ -202,4 +206,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LoginForm;

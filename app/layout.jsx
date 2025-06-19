@@ -55,10 +55,10 @@ export default function RootLayout({ children }) {
         <SessionWrapper>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="flex min-h-screen flex-col">
-              <Header />
+              {/* <Header /> */}
               <main className="flex-1">{children}</main>
               <Toaster />
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </ThemeProvider>
         </SessionWrapper>
