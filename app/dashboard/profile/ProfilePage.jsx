@@ -44,7 +44,7 @@ export default function UserProfilePage({ user }) {
     useEffect(() => {
         async function fetchProfile() {
             if (!user?.id) {
-                router.push("/login")
+                router.push("/sign-in")
                 return
             }
             const profile = await getUserProfile(user.id)

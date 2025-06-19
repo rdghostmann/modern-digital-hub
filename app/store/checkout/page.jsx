@@ -7,7 +7,7 @@ export default async function Checkout() {
   const session = await getServerSession(authOptions)
 
   if (!session?.user) {
-    redirect("/login")
+    redirect("/sign-in")
   }
 
   const { email } = session.user

@@ -64,7 +64,7 @@ export const authOptions = {
       };
       return session;
     },
-    async redirect({ url, baseUrl, user, token }) {
+    async redirect({ baseUrl, token }) {
       // Use token.role for redirect
       if (token?.role === "admin") return "/admin";
       if (token?.role === "user") return "/dashboard";
@@ -73,7 +73,7 @@ export const authOptions = {
     }
   },
   pages: {
-    signIn: "/login",
+    signIn: "/sign-in",
     error: "/auth/error",
   },
   secret: process.env.NEXTAUTH_SECRET,

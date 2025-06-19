@@ -43,15 +43,15 @@ export default function FeaturedPostCard({ post }) {
               height={30}
               className="rounded-full mr-2"
             />
-            <div className="text-sm">
-              <p className="font-medium">{post.author.name}</p>
-              <div className=" text-gray-500 dark:text-gray-400">
-                <p>{post.date}</p>
-                {/* <span className="mx-1">•</span> */}
-                <span><Clock className="h-3 w-3 mr-1" /></span>
-                <span>{post.readTime}</span>
-              </div>
-            </div>
+          <div className="text-sm">
+  <p className="font-medium">{post.author?.name || "Unknown Author"}</p>
+  <div className="flex items-center text-gray-500 dark:text-gray-400">
+    <p className="mr-2">{post.date || "Unknown Date"}</p>
+    <span className="mx-1">•</span>
+    <Clock className="h-3 w-3 mr-1" />
+    <span>{post.readTime || "N/A"}</span>
+  </div>
+</div>
           </div>
         </CardContent>
       </Card>

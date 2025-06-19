@@ -7,6 +7,8 @@ import FeaturedPost from "@/components/FeaturedPost/FeaturedPost"
 import Newsletter from "@/components/Newsletter/Newsletter"
 import SidebarPost from "@/components/SidebarPost/SidebarPost"
 import CategoriesSection from "@/components/CategoriesSection/CategoriesSection"
+import Header from "@/components/header"
+import Footer from "@/components/footer"
 
 
 
@@ -15,7 +17,8 @@ export default function Home() {
 
   return (
     // <div className="pt-16">
-    <div className="pt-3">
+    <div className="pt-0">
+      <Header />
       {/* Top Banner Ad */}
       {/* <div className="bg-gray-50 dark:bg-gray-900 py-4">
         <div className="container mx-auto px-4">
@@ -56,6 +59,9 @@ export default function Home() {
 
       {/* Newsletter Section */}
       <Newsletter />
+
+      {/* Footer Section  */}
+      <Footer />
     </div>
   )
 }

@@ -7,8 +7,8 @@ export async function middleware(req) {
 
   // Allow access to login and register for unauthenticated users
   if (!token) {
-    if (url.pathname !== "/login" && url.pathname !== "/register") {
-      return NextResponse.redirect(new URL("/login", req.url));
+    if (url.pathname !== "/sign-in" && url.pathname !== "/register") {
+      return NextResponse.redirect(new URL("/sign-in", req.url));
     }
     return NextResponse.next();
   }
@@ -41,5 +41,5 @@ export async function middleware(req) {
 
 // Apply middleware only to relevant routes
 export const config = {
-  matcher: ["/admin/:path*", "/dashboard/:path*", "/writer/:path*", "/login", "/register"],
+  matcher: ["/admin/:path*", "/dashboard/:path*", "/writer/:path*", "/sign-in", "/register"],
 };
