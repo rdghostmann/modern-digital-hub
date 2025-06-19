@@ -12,11 +12,9 @@ export const metadata = {
 export default function AuthRootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} cz-shortcut-listen="true">
-            <div className="flex min-h-screen flex-col">
-              <div className="flex-1">{children}</div>
-              <Toaster />
-            </div>
+      <body className={inter.className}>
+        {children}
+        <Toaster />
       </body>
     </html>
   )

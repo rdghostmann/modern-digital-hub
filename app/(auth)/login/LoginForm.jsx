@@ -6,9 +6,9 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
 import { Loader } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 
 const quotes = [
   {
@@ -59,7 +59,6 @@ function QuoteCarousel() {
 }
 
 const LoginForm = () => {
-  const { toast } = useToast();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -74,7 +73,6 @@ const LoginForm = () => {
     if (!email || !password) {
       setLoading(false);
       return toast({
-        variant: "destructive",
         title: "Validation Error",
         description: "Email and Password are required",
       });
@@ -89,7 +87,6 @@ const LoginForm = () => {
 
       if (result?.error) {
         toast({
-          variant: "destructive",
           title: "Login Failed",
           description: result.error || "Invalid email or password",
         });
